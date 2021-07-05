@@ -6,6 +6,7 @@ import numpy as np
 class ST7789(object):
     """class for ST7789  240*240 1.3inch OLED displays."""
 
+
     def __init__(self,spi,rst = 27,dc = 25,bl = 24):
         self.width = 240
         self.height = 240
