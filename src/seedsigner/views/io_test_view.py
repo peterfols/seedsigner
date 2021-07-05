@@ -80,7 +80,7 @@ class IOTestView(View):
         self.draw.text((200, 160), "EXIT", fill="ORANGE", font=View.IMPACT18)
         self.draw.rectangle((30, 205, 210, 235), outline="ORANGE", fill="BLACK")
         tw, th = self.draw.textsize(self.qr_text, font=View.IMPACT22)
-        self.draw.text(((240 - tw) / 2, 205), self.qr_text, fill="ORANGE", font=View.IMPACT22)
+        self.draw.text(((self.WIDTH - tw) / 2, 205), self.qr_text, fill="ORANGE", font=View.IMPACT22)
         View.DispShowImage()
         self.redraw_complete = True
 
@@ -135,7 +135,7 @@ class IOTestView(View):
         if self.redraw == False and self.redraw_complete == True:
             self.draw.rectangle((30, 205, 210, 235), outline="ORANGE", fill="ORANGE")
             tw, th = self.draw.textsize(self.qr_text, font=View.IMPACT22)
-            self.draw.text(((240 - tw) / 2, 205), self.qr_text, fill="BLACK", font=View.IMPACT22)
+            self.draw.text(((self.WIDTH - tw) / 2, 205), self.qr_text, fill="BLACK", font=View.IMPACT22)
             View.DispShowImage()
             self.redraw = True
         

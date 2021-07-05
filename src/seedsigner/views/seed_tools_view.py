@@ -196,9 +196,9 @@ class SeedToolsView(View):
 
         self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
         tw, th = self.draw.textsize("The final word is :", font=View.IMPACT23)
-        self.draw.text(((240 - tw) / 2, 60), "The final word is :", fill="ORANGE", font=View.IMPACT23)
+        self.draw.text(((self.WIDTH - tw) / 2, 60), "The final word is :", fill="ORANGE", font=View.IMPACT23)
         tw, th = self.draw.textsize(last_word, font=View.IMPACT50)
-        self.draw.text(((240 - tw) / 2, 90), last_word, fill="ORANGE", font=View.IMPACT50)
+        self.draw.text(((self.WIDTH - tw) / 2, 90), last_word, fill="ORANGE", font=View.IMPACT50)
         self.draw.text((73, 210), "Right to Continue", fill="ORANGE", font=View.IMPACT18)
         View.DispShowImage()
 
@@ -465,7 +465,7 @@ class SeedToolsView(View):
         self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
         tw, th = View.draw.textsize("Selected Words", font=View.IMPACT18)
-        self.draw.text(((240 - tw) / 2, 2), "Selected Words", fill="ORANGE", font=View.IMPACT18)
+        self.draw.text(((self.WIDTH - tw) / 2, 2), "Selected Words", fill="ORANGE", font=View.IMPACT18)
 
         self.draw.text((2, 40), "1: "     + seed_phrase[0] , fill="ORANGE", font=View.IMPACT23)
         self.draw.text((2, 65), "2: "     + seed_phrase[1] , fill="ORANGE", font=View.IMPACT23)
@@ -482,7 +482,7 @@ class SeedToolsView(View):
             self.draw.text((120, 165), "12: " + seed_phrase[11], fill="ORANGE", font=View.IMPACT23)
 
         tw, th = View.draw.textsize(bottom, font=View.IMPACT18)
-        self.draw.text(((240 - tw) / 2, 210), bottom, fill="ORANGE", font=View.IMPACT18)
+        self.draw.text(((self.WIDTH - tw) / 2, 210), bottom, fill="ORANGE", font=View.IMPACT18)
         View.DispShowImage()
 
         input = self.buttons.wait_for([B.KEY_RIGHT, B.KEY_LEFT])
@@ -495,7 +495,7 @@ class SeedToolsView(View):
         self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
         tw, th = View.draw.textsize("Selected Words (1/2)", font=View.IMPACT18)
-        self.draw.text(((240 - tw) / 2, 2), "Selected Words (1/2)", fill="ORANGE", font=View.IMPACT18)
+        self.draw.text(((self.WIDTH - tw) / 2, 2), "Selected Words (1/2)", fill="ORANGE", font=View.IMPACT18)
 
         self.draw.text((2, 40), "1: "     + seed_phrase[0] , fill="ORANGE", font=View.IMPACT23)
         self.draw.text((2, 65), "2: "     + seed_phrase[1] , fill="ORANGE", font=View.IMPACT23)
@@ -510,7 +510,7 @@ class SeedToolsView(View):
         self.draw.text((120, 140), "11: " + seed_phrase[10], fill="ORANGE", font=View.IMPACT23)
         self.draw.text((120, 165), "12: " + seed_phrase[11], fill="ORANGE", font=View.IMPACT23)
         tw, th = View.draw.textsize("Right to Continue", font=View.IMPACT18)
-        self.draw.text(((240 - tw) / 2, 210), "Right to Continue", fill="ORANGE", font=View.IMPACT18)
+        self.draw.text(((self.WIDTH - tw) / 2, 210), "Right to Continue", fill="ORANGE", font=View.IMPACT18)
         View.DispShowImage()
 
         input = self.buttons.wait_for([B.KEY_RIGHT, B.KEY_LEFT])
@@ -523,7 +523,7 @@ class SeedToolsView(View):
         self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
         
         tw, th = View.draw.textsize("Selected Words (2/2)", font=View.IMPACT18)
-        self.draw.text(((240 - tw) / 2, 2), "Selected Words (2/2)", fill="ORANGE", font=View.IMPACT18)
+        self.draw.text(((self.WIDTH - tw) / 2, 2), "Selected Words (2/2)", fill="ORANGE", font=View.IMPACT18)
 
         self.draw.text((2, 40), "13: "     + seed_phrase[12] , fill="ORANGE", font=View.IMPACT23)
         self.draw.text((2, 65), "14: "     + seed_phrase[13] , fill="ORANGE", font=View.IMPACT23)
@@ -539,7 +539,7 @@ class SeedToolsView(View):
         if len(seed_phrase) >= 24:
             self.draw.text((120, 165), "24: " + seed_phrase[23], fill="ORANGE", font=View.IMPACT23)
         tw, th = View.draw.textsize(bottom, font=View.IMPACT18)
-        self.draw.text(((240 - tw) / 2, 210), bottom, fill="ORANGE", font=View.IMPACT18)
+        self.draw.text(((self.WIDTH - tw) / 2, 210), bottom, fill="ORANGE", font=View.IMPACT18)
         View.DispShowImage()
 
         input = self.buttons.wait_for([B.KEY_RIGHT, B.KEY_LEFT])

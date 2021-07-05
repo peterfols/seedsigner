@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw, ImageFont
 import spidev as SPI
 from multiprocessing import Queue
 
-from seedsigner.helpers import ST7789
+from seedsigner.helpers.screen import Screen, get_screen_dimensions
 
 
 ### Generic View Class to Instatiate Display
@@ -11,8 +11,7 @@ from seedsigner.helpers import ST7789
 ### Designed to be inherited for other view classes, but not required
 
 class View:
-    WIDTH = self.WIDTH
-    HEIGHT = self.WIDTH
+    WIDTH, HEIGHT = get_screen_dimensions()
 
     # Define necessart fonts
     IMPACT16 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 16)
@@ -57,7 +56,7 @@ class View:
         # self.WIDTHxself.WIDTH display with hardware SPI:
         View.bus = 0
         View.device = 0
-        View.disp = ST7789(SPI.SpiDev(View.bus, View.device), View.RST, View.DC, View.BL)
+        View.disp = Screen(SPI.SpiDev(View.bus, View.device), View.RST, View.DC, View.BL)
         View.disp.Init()
 
         self.queue = Queue()
