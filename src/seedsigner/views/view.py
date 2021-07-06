@@ -102,8 +102,8 @@ class View:
         return cls.draw.ellipse(dimensions, outline=outline, fill=fill)
 
     @classmethod
-    def draw_modal(cls, lines=[], title="", bottom="") -> None:
-
+    def draw_modal(cls, lines=None, title="", bottom="") -> None:
+        lines = [] if not lines else lines
         View.empty_screen()
 
         if len(title) > 0:
@@ -131,14 +131,15 @@ class View:
         return
 
     @classmethod
-    def draw_prompt_yes_no(cls, lines=[], title="", bottom="") -> None:
+    def draw_prompt_yes_no(cls, lines=None, title="", bottom="") -> None:
+        lines = [] if not lines else lines
 
         cls.draw_prompt_custom("", "Yes ", "No ", lines, title, bottom)
         return
 
     @classmethod
-    def draw_prompt_custom(cls, a_txt, b_txt, c_txt, lines=[], title="", bottom="") -> None:
-
+    def draw_prompt_custom(cls, a_txt, b_txt, c_txt, lines=None, title="", bottom="") -> None:
+        lines = [] if not lines else lines
         View.empty_screen()
 
         if len(title) > 0:

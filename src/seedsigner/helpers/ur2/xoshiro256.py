@@ -44,7 +44,7 @@ JUMP = [ 0x180ec6d33cfd0aba, 0xd5a61266f0c9392c, 0xa9582618e03fc9aa, 0x39abdc452
 LONG_JUMP = [ 0x76e15d3efefdcbbf, 0xc5004e441c522fb3, 0x77710069854ee241, 0x39109bb02acbe635 ]
 
 class Xoshiro256:
-    def __init__(self, arr = None):
+    def __init__(self, arr=None):
         self.s = [0] * 4
         if arr != None:
             self.s[0] = arr[0]

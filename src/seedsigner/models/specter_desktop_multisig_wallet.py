@@ -11,7 +11,7 @@ import re
 
 class SpecterDesktopMultisigWallet(Wallet):
 
-    def __init__(self, current_network = "main", hardened_derivation = "m/48h/0h/0h/2h") -> None:
+    def __init__(self, current_network = "main", hardened_derivation="m/48h/0h/0h/2h") -> None:
         if current_network == "main":
             Wallet.__init__(self, current_network, "m/48h/0h/0h/2h")
         elif current_network == "test":
@@ -97,10 +97,10 @@ class SpecterDesktopMultisigWallet(Wallet):
 
         return True
 
-    def make_xpub_qr_codes(self, data, callback = None) -> []:
+    def make_xpub_qr_codes(self, data, callback=None) -> []:
         return self.make_signing_qr_codes(data, callback)
 
-    def make_signing_qr_codes(self, data, callback = None) -> []:
+    def make_signing_qr_codes(self, data, callback=None) -> []:
         qr = QR()
 
         cnt = 0

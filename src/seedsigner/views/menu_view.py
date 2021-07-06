@@ -21,7 +21,7 @@ class MenuView(View):
 
     ### Main Menu
 
-    def display_main_menu(self, sub_menu = None) -> int:
+    def display_main_menu(self, sub_menu=None) -> int:
         ret_val = 0
         input = 0
         lines = ["Seed Tools", "Signing Tools", "Settings", "Power OFF Device"]
@@ -141,7 +141,8 @@ class MenuView(View):
 
     ### Generic Single Menu Selection (returns 1,2,3,4,5,6 ...)
 
-    def display_generic_selection_menu(self, lines = [], title = None, bottom = None) -> int:
+    def display_generic_selection_menu(self, lines=None, title = None, bottom=None) -> int:
+        lines = [] if not lines else lines
         self.draw_menu(lines, 1, title, bottom)
 
         while True:
@@ -155,7 +156,7 @@ class MenuView(View):
 
     ### Generic Word 12 or 24 seed phrase menu
 
-    def display_12_24_word_menu(self, return_txt = "... [ Return to ... ]") -> int:
+    def display_12_24_word_menu(self, return_txt="... [ Return to ... ]") -> int:
         lines = [return_txt, "Use a 12 word seed", "Use a 24 word seed"]
         self.draw_menu(lines)
 
@@ -176,7 +177,7 @@ class MenuView(View):
 
     ### Select a Seed Slot to Save a Seed Menu
 
-    def display_saved_seed_menu(self, storage, type = 1, return_sel_txt = "... [ Return to Seed Tools ]") -> int:
+    def display_saved_seed_menu(self, storage, type = 1, return_sel_txt="... [ Return to Seed Tools ]") -> int:
         lines = []
         if return_sel_txt != None:
             lines.append(return_sel_txt)
@@ -232,7 +233,7 @@ class MenuView(View):
 
     ### Generic Draw Menu Method
 
-    def draw_menu(self, lines, selected_menu_num = 1, title = None, bottom = None) -> None:
+    def draw_menu(self, lines, selected_menu_num = 1, title = None, bottom=None) -> None:
         if title == None:
             t = "SeedSigner  v" + self.controller.VERSION
         else:
@@ -303,13 +304,13 @@ class MenuView(View):
 
     ### Generic Menu Navigation
 
-    def menu_up(self, title = None, bottom = None):
+    def menu_up(self, title = None, bottom=None):
         if self.selected_menu_num <= 1:
             self.draw_menu(self.menu_lines, len(self.menu_lines), title, bottom)
         else:
             self.draw_menu(self.menu_lines, self.selected_menu_num - 1, title, bottom)
 
-    def menu_down(self, title = None, bottom = None):
+    def menu_down(self, title = None, bottom=None):
         if self.selected_menu_num >= len(self.menu_lines):
             self.draw_menu(self.menu_lines, 1, title, bottom)
         else:

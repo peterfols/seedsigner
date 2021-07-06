@@ -76,7 +76,7 @@ class Controller:
     ### Menu View handles navigation within the menu
     ### Sub Menu's like Seed Tools, Signing Tools, Settings are all in the Menu View
 
-    def show_main_menu(self, sub_menu = 0):
+    def show_main_menu(self, sub_menu=0):
         ret_val = sub_menu
         while True:
             ret_val = self.menu_view.display_main_menu(ret_val)

@@ -32,7 +32,9 @@ class Buttons:
 
         return
 
-    def wait_for(self, keys = [], check_release = True, release_keys = []) -> int:
+    def wait_for(self, keys=None, check_release=True, release_keys=None) -> int:
+        keys = [] if not keys else keys
+        release_keys = [] if not release_keys else release_keys
         if not release_keys:
             release_keys = keys
         while True:
@@ -47,7 +49,8 @@ class Buttons:
                         return i
             time.sleep(0.01) # wait 10 ms to give CPU chance to do other things
 
-    def add_events(self, keys = []):
+    def add_events(self, keys=None):
+        keys = [] if not keys else keys
         for i in keys:
             GPIO.add_event_detect(i, self.GPIO.RISING, callback=Buttons.rising_callback)
 

@@ -167,10 +167,10 @@ class Wallet:
             self.scan_started_ind = 1
             self.controller.menu_view.draw_modal(["Scan Animated QR"], "", "Right to Exit")
 
-    def make_xpub_qr_codes(self, data, callback = None) -> []:
+    def make_xpub_qr_codes(self, data, callback=None) -> []:
         return []
 
-    def make_signing_qr_codes(self, data, callback = None) -> []:
+    def make_signing_qr_codes(self, data, callback=None) -> []:
         return []
 
     def qr_sleep(self):
