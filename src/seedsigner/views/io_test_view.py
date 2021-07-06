@@ -69,7 +69,7 @@ class IOTestView(View):
         self.redraw_complete = False
         self.redraw = False
         self.empty_screen()
-        self.draw_text("Input/Output Check:", 5, 'impact', 18, width=45)
+        self.draw_text("Input/Output Check:", 5, 18, width=45)
         self.draw_polygon([(61, 89), (80, 46), (99, 89)], fill=0)
         self.draw_polygon([(51, 100), (8, 119), (51, 138)], fill=0)
         self.draw_polygon([(109, 100), (152, 119), (109, 138)], fill=0)
@@ -77,9 +77,9 @@ class IOTestView(View):
         self.draw_ellipse([(61, 99), (99, 141)], fill=0)
         self.draw_ellipse([(198, 40), (238, 80)],  fill=0)
         self.draw_ellipse([(198, 95), (238, 135)],  fill=0)
-        self.draw_text("EXIT", 160, 'impact', 18, width=200)
+        self.draw_text("EXIT", 160, 18, width=200)
         self.draw_rectangle((30, 205, 210, 235),  fill="BLACK")
-        self.draw_text(self.qr_text, 205, 'impact', 22)
+        self.draw_text(self.qr_text, 205, 22)
         View.DispShowImage()
         self.redraw_complete = True
 
@@ -133,7 +133,7 @@ class IOTestView(View):
         self.qr_text = "QR Scanned"
         if self.redraw is False and self.redraw_complete is True:
             self.draw_rectangle((30, 205, 210, 235))
-            self.draw_text(self.qr_text, 205, 'impact', 22, fill='BLACK')
+            self.draw_text(self.qr_text, 205, 22, fill='BLACK')
             View.DispShowImage()
             self.redraw = True
         

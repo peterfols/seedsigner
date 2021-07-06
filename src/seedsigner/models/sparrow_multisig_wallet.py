@@ -134,8 +134,8 @@ class SparrowMultiSigWallet(Wallet):
             if not self.capture_complete() and self.scan_display_working == 0:
                 self.scan_display_working = 1
                 View.empty_screen()
-                View.draw_text("Collecting QR Codes:", 15, 'impact', 25)
-                View.draw_text(str(round(self.percentage_complete * 100)) + "% Complete", 125, 'impact', 22)
+                View.draw_text("Collecting QR Codes:", 15, 25)
+                View.draw_text(str(round(self.percentage_complete * 100)) + "% Complete", 125, 22)
                 View.DispShowImage()
                 self.scan_display_working = 0
 

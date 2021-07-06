@@ -57,10 +57,10 @@ class SettingsToolsView(View):
 
     def display_version_info(self):
         View.empty_screen()
-        self.draw_text("SeedSigner", 20, 'impact', 22)
-        self.draw_text("Version v" + self.controller.VERSION, 55, 'impact', 22)
-        self.draw_text("built for use with", 90, 'impact', 22)
-        self.draw_text("Specter-desktop", 125, 'impact', 22)
-        self.draw_text("v1.1.0 or higher", 160, 'impact', 22)
-        self.draw_text("(Joystick RIGHT to EXIT)", 210, 'impact', 18)
+        self.draw_text("SeedSigner", 20, 22)
+        self.draw_text("Version v" + self.controller.VERSION, 55, 22)
+        self.draw_text("built for use with", 90, 22)
+        self.draw_text("Specter-desktop", 125, 22)
+        self.draw_text("v1.1.0 or higher", 160, 22)
+        self.draw_text("(Joystick RIGHT to EXIT)", 210, 18)
         View.DispShowImage()

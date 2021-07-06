@@ -70,7 +70,7 @@ class View:
             return ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/courbd.ttf', size)
 
     @classmethod
-    def draw_text(cls, text, height, font, font_size, align='center', fill=DEFAULT_COLOR, width=None):
+    def draw_text(cls, text, height, font_size, font='impact', align='center', fill=DEFAULT_COLOR, width=None):
         font_size = cls.scale_dimension(font_size)
         height = cls.scale_dimension(height)
         width = cls.scale_dimension(width) if width else None
@@ -107,24 +107,24 @@ class View:
         View.empty_screen()
 
         if len(title) > 0:
-            cls.draw_text(title, 2, 'impact', 22)
+            cls.draw_text(title, 2, 22)
         if len(lines) == 1:
-            cls.draw_text(lines[0], 90, 'impact', 26)
+            cls.draw_text(lines[0], 90, 26)
         elif len(lines) == 2:
-            cls.draw_text(lines[0], 90, 'impact', 22)
-            cls.draw_text(lines[1], 125, 'impact', 22)
+            cls.draw_text(lines[0], 90, 22)
+            cls.draw_text(lines[1], 125, 22)
         elif len(lines) == 3:
-            cls.draw_text(lines[0], 55, 'impact', 26)
-            cls.draw_text(lines[1], 90, 'impact', 22)
-            cls.draw_text(lines[2], 125, 'impact', 22)
+            cls.draw_text(lines[0], 55, 26)
+            cls.draw_text(lines[1], 90, 22)
+            cls.draw_text(lines[2], 125, 22)
         elif len(lines) == 4:
-            cls.draw_text(lines[0], 55, 'impact', 22)
-            cls.draw_text(lines[1], 90, 'impact', 22)
-            cls.draw_text(lines[2], 125, 'impact', 22)
-            cls.draw_text(lines[3], 160, 'impact', 22)
+            cls.draw_text(lines[0], 55, 22)
+            cls.draw_text(lines[1], 90, 22)
+            cls.draw_text(lines[2], 125, 22)
+            cls.draw_text(lines[3], 160, 22)
 
         if len(bottom) > 0:
-            cls.draw_text(lines[3], 210, 'impact', 18)
+            cls.draw_text(lines[3], 210, 18)
 
         View.DispShowImage()
 
@@ -142,29 +142,29 @@ class View:
         View.empty_screen()
 
         if len(title) > 0:
-            cls.draw_text(title, 2, 'impact', 22)
+            cls.draw_text(title, 2, 22)
 
         if len(bottom) > 0:
-            cls.draw_text(title, 210, 'impact', 18)
+            cls.draw_text(title, 210, 18)
 
         if len(lines) == 1:
-            cls.draw_text(lines[0], 90, 'impact', 26)
+            cls.draw_text(lines[0], 90, 26)
         elif len(lines) == 2:
-            cls.draw_text(lines[0], 90, 'impact', 22)
-            cls.draw_text(lines[1], 125, 'impact', 22)
+            cls.draw_text(lines[0], 90, 22)
+            cls.draw_text(lines[1], 125, 22)
         elif len(lines) == 3:
-            cls.draw_text(lines[0], 20, 'impact', 26)
-            cls.draw_text(lines[1], 90, 'impact', 22)
-            cls.draw_text(lines[2], 125, 'impact', 22)
+            cls.draw_text(lines[0], 20, 26)
+            cls.draw_text(lines[1], 90, 22)
+            cls.draw_text(lines[2], 125, 22)
         elif len(lines) == 4:
-            cls.draw_text(lines[0], 20, 'impact', 22)
-            cls.draw_text(lines[1], 90, 'impact', 22)
-            cls.draw_text(lines[2], 125, 'impact', 22)
-            cls.draw_text(lines[3], 160, 'impact', 22)
+            cls.draw_text(lines[0], 20, 22)
+            cls.draw_text(lines[1], 90, 22)
+            cls.draw_text(lines[2], 125, 22)
+            cls.draw_text(lines[3], 160, 22)
 
-        cls.draw_text(a_txt, 39, 'impact', 25)
-        cls.draw_text(a_txt, 39+60, 'impact', 25)
-        cls.draw_text(a_txt, 39+120, 'impact', 25)
+        cls.draw_text(a_txt, 39, 25)
+        cls.draw_text(a_txt, 39+60, 25)
+        cls.draw_text(a_txt, 39+120, 25)
 
         View.DispShowImage()
 
@@ -179,10 +179,10 @@ class View:
 
         View.empty_screen()
 
-        cls.draw_text("Powering Down...", 45, 'impact', 22)
-        cls.draw_text("Please wait about", 100, 'impact', 20)
-        cls.draw_text("30 seconds before", 130, 'impact', 20)
-        cls.draw_text("disconnecting power.", 160, 'impact', 20)
+        cls.draw_text("Powering Down...", 45, 22)
+        cls.draw_text("Please wait about", 100, 20)
+        cls.draw_text("30 seconds before", 130, 20)
+        cls.draw_text("disconnecting power.", 160, 20)
         View.DispShowImage()
 
     @classmethod

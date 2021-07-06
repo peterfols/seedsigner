@@ -102,23 +102,23 @@ class SigningToolsView(View):
 
     def display_transaction_information(self, wallet) -> None:
         self.empty_screen()
-        View.draw_text("Confirm last 13 chars", 5, 'impact', 22)
-        View.draw_text("of the receiving address:", 30, 'impact', 22)
-        View.draw_text(wallet.destinationaddress[-13:], 55, 'impact', 22)
-        View.draw_text("Amount Sending:", 90, 'impact', 22)
+        View.draw_text("Confirm last 13 chars", 5, 22)
+        View.draw_text("of the receiving address:", 30, 22)
+        View.draw_text(wallet.destinationaddress[-13:], 55, 22)
+        View.draw_text("Amount Sending:", 90, 22)
         if wallet.spend == 0:
-            View.draw_text("Self-Transfer (not parsed)", 115, 'impact', 22)
+            View.draw_text("Self-Transfer (not parsed)", 115, 22)
         else:
-            View.draw_text(str(wallet.spend) + " satoshis", 115, 'impact', 22)
-        View.draw_text("Plus a fee of:", 150, 'impact', 22)
-        View.draw_text(str(int(wallet.fee)) + " satoshis", 175, 'impact', 22)
-        View.draw_text("Left to Exit, Right to Continue", 175, 'impact', 18)
+            View.draw_text(str(wallet.spend) + " satoshis", 115, 22)
+        View.draw_text("Plus a fee of:", 150, 22)
+        View.draw_text(str(int(wallet.fee)) + " satoshis", 175, 22)
+        View.draw_text("Left to Exit, Right to Continue", 175, 18)
         View.DispShowImage()
 
     @classmethod
     def qr_gen_status(cls, percentage):
         View.empty_screen()
-        View.draw_text("QR Generation", 90, 'impact', 25)
-        View.draw_text(str(round(percentage)) + "% Complete", 125, 'impact', 25)
+        View.draw_text("QR Generation", 90, 25)
+        View.draw_text(str(round(percentage)) + "% Complete", 125, 25)
         View.DispShowImage()
 

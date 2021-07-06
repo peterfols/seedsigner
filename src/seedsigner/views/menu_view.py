@@ -260,7 +260,7 @@ class MenuView(View):
             #Menu has changed, redraw
 
             View.empty_screen()
-            View.draw_text(t, 2, 'impact', 22)
+            View.draw_text(t, 2, 22)
 
             num_of_lines = len(lines)
 
@@ -292,7 +292,7 @@ class MenuView(View):
                 if num_of_lines >= 12:
                     self.draw_menu_text(15, 150, lines[11], (True if selected_menu_num == 12 else False))
 
-            View.draw_text(b, 210, 'impact', 18)
+            View.draw_text(b, 210, 18)
             View.DispShowImage()
 
             # saved update menu lines and selection
@@ -321,7 +321,7 @@ class MenuView(View):
 
         if selected is True:
             View.draw_rectangle((5, y-5, 235, y+30), outline=0)
-            View.draw_text(line, y, 'impact', 20, width=x, fill='BLACK')
+            View.draw_text(line, y, 20, width=x, fill='BLACK')
         else:
-            View.draw_text(line, y, 'impact', 20, width=x)
+            View.draw_text(line, y, 20, width=x)
         return
