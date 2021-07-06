@@ -85,7 +85,7 @@ class Wallet:
         # parse qr data to string to be cancatinated together into a pbst transaction
         return "empty"
 
-    def capture_complete() -> bool:
+    def capture_complete(self) -> bool:
         # returns true if the qr data list is complete
         return False
 
@@ -247,7 +247,7 @@ class Wallet:
                 elif "pkh" in policy["type"]:
                     if len(out.bip32_derivations.values()) > 0:
                         der = list(out.bip32_derivations.values())[0].derivation
-                        my_pubkey = root.derive(der)
+                        my_pubkey = self.root.derive(der)
                     if policy["type"] == "p2wpkh":
                         sc = script.p2wpkh(my_pubkey)
                     elif policy["type"] == "p2sh-p2wpkh":

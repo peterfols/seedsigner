@@ -31,7 +31,7 @@ class SeedStorage:
     def valid_seed_structure(self, seed_phrase) -> bool:
         if isinstance(seed_phrase, list):
             if len(seed_phrase) in (12,24):
-                if all(word in seed_phrase for word in SEEDWORDS):
+                if all(word in seed_phrase for word in self.SEEDWORDS):
                     return True
                 else:
                     return False
