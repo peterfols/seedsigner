@@ -52,7 +52,7 @@ class View:
     def DispShowImage(cls, image=None):
         if image == None:
             image = View.canvas
-        View.disp.ShowImage(image, 0, 0)
+        cls.disp.ShowImage(image, 0, 0)
 
     @classmethod
     def DispShowImageWithText(cls, image, text):
@@ -60,7 +60,7 @@ class View:
         draw = ImageDraw.Draw(image_copy)
         tw, th = draw.textsize(text, font=cls.get_font('couriernew', cls.scale_dimension(14)))
         draw.text(((cls.WIDTH - tw) / 2, cls.scale_dimension(228)), text, fill="GREY", font=cls.get_font('couriernew', cls.scale_dimension(14)))
-        View.disp.ShowImage(image_copy, 0, 0)
+        cls.disp.ShowImage(image_copy, 0, 0)
 
     @classmethod
     def get_font(cls, name, size):
@@ -75,16 +75,16 @@ class View:
         height = cls.scale_dimension(height)
         width = cls.scale_dimension(width) if width else None
         if not width and align == 'center':
-            tw, th = View.draw.textsize(text, font=cls.get_font(font, font_size))
+            tw, th = cls.draw.textsize(text, font=cls.get_font(font, font_size))
             width = (cls.WIDTH - tw) / 2
         elif not width and align == 'right':
             tw, th = cls.WIDTH - cls.get_font(font, font_size).getsize(text)[0]
             width = tw
-        View.draw.text(width, height, text, fill=fill, font=cls.get_font(font, font_size))
+        cls.draw.text(width, height, text, fill=fill, font=cls.get_font(font, font_size))
 
     @classmethod
     def draw_polygon(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
-        View.draw.polygon([(cls.scale_dimension(dim[0]), cls.scale_dimension(dim[1])) for dim in dimensions], outline=outline, fill=fill)
+        cls.draw.polygon([(cls.scale_dimension(dim[0]), cls.scale_dimension(dim[1])) for dim in dimensions], outline=outline, fill=fill)
 
     @classmethod
     def draw_rectangle(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR, resize=True):
@@ -94,7 +94,7 @@ class View:
 
     @classmethod
     def empty_screen(cls):
-        return cls.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        return cls.draw_rectangle((0, 0, cls.canvas_width, cls.canvas_height), outline=0, fill=0, resize=False)
 
     @classmethod
     def draw_ellipse(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
@@ -104,7 +104,7 @@ class View:
     @classmethod
     def draw_modal(cls, lines=None, title="", bottom="") -> None:
         lines = [] if not lines else lines
-        View.empty_screen()
+        cls.empty_screen()
 
         if len(title) > 0:
             cls.draw_text(title, 2, 22)
@@ -126,7 +126,7 @@ class View:
         if len(bottom) > 0:
             cls.draw_text(lines[3], 210, 18)
 
-        View.DispShowImage()
+        cls.DispShowImage()
 
         return
 
@@ -140,7 +140,7 @@ class View:
     @classmethod
     def draw_prompt_custom(cls, a_txt, b_txt, c_txt, lines=None, title="", bottom="") -> None:
         lines = [] if not lines else lines
-        View.empty_screen()
+        cls.empty_screen()
 
         if len(title) > 0:
             cls.draw_text(title, 2, 22)
@@ -167,7 +167,7 @@ class View:
         cls.draw_text(a_txt, 39+60, 25)
         cls.draw_text(a_txt, 39+120, 25)
 
-        View.DispShowImage()
+        cls.DispShowImage()
 
         return
 
@@ -178,15 +178,15 @@ class View:
     @classmethod
     def display_power_off_screen(cls):
 
-        View.empty_screen()
+        cls.empty_screen()
 
         cls.draw_text("Powering Down...", 45, 22)
         cls.draw_text("Please wait about", 100, 20)
         cls.draw_text("30 seconds before", 130, 20)
         cls.draw_text("disconnecting power.", 160, 20)
-        View.DispShowImage()
+        cls.DispShowImage()
 
     @classmethod
     def display_blank_screen(cls):
-        View.empty_screen()
-        View.DispShowImage()
+        cls.empty_screen()
+        cls.DispShowImage()
