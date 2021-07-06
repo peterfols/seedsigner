@@ -259,7 +259,7 @@ class MenuView(View):
         if lines != self.menu_lines or selected_menu_num != self.selected_menu_num:
             #Menu has changed, redraw
 
-            View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+            View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
             View.draw_text(t, 2, 'impact', 22)
 
             num_of_lines = len(lines)

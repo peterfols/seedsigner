@@ -87,8 +87,8 @@ class View:
         View.draw.polygon([cls.scale_dimension(dim) for dim in dimensions], outline=outline, fill=fill)
 
     @classmethod
-    def draw_rectangle(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
-        if dimensions != (0, 0, View.canvas_width, View.canvas_height):
+    def draw_rectangle(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR, resize=True):
+        if resize:
             dimensions = [cls.scale_dimension(dim) for dim in dimensions]
         return cls.draw.rectangle(dimensions, outline=outline, fill=fill)
 
@@ -100,7 +100,7 @@ class View:
     @classmethod
     def draw_modal(cls, lines=[], title="", bottom="") -> None:
 
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
 
         if len(title) > 0:
             cls.draw_text(title, 2, 'impact', 22)
@@ -135,7 +135,7 @@ class View:
     @classmethod
     def draw_prompt_custom(cls, a_txt, b_txt, c_txt, lines=[], title="", bottom="") -> None:
 
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
 
         if len(title) > 0:
             cls.draw_text(title, 2, 'impact', 22)
@@ -173,7 +173,7 @@ class View:
     @classmethod
     def display_power_off_screen(cls):
 
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
 
         cls.draw_text("Powering Down...", 45, 'impact', 22)
         cls.draw_text("Please wait about", 100, 'impact', 20)
@@ -183,5 +183,5 @@ class View:
 
     @classmethod
     def display_blank_screen(cls):
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
         View.DispShowImage()
