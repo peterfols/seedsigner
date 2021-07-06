@@ -72,6 +72,7 @@ class View:
     def draw_text(cls, text, height, font, font_size, align='center', fill='ORANGE', width=None):
         font_size = cls.scale_dimension(font_size)
         height = cls.scale_dimension(height)
+        width = cls.scale_dimension(width) if width else None
         if not width and align == 'center':
             tw, th = View.draw.textsize(text, font=cls.get_font(font, font_size))
             width = (cls.WIDTH - tw) / 2

@@ -68,8 +68,8 @@ class IOTestView(View):
     def draw_io_screen(self):
         self.redraw_complete = False
         self.redraw = False
-        self.draw.rectangle((0,0,View.canvas_width, View.canvas_height), outline=0, fill=0)
-        self.draw.text((45, 5), "Input/Output Check:", fill="ORANGE", font=View.IMPACT18)
+        self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        self.draw_text("Input/Output Check:", 5, 'impact', 18, width=45)
         self.draw.polygon([(61, 89), (80, 46), (99, 89)], outline="ORANGE", fill=0)
         self.draw.polygon([(51, 100), (8, 119), (51, 138)], outline="ORANGE", fill=0)
         self.draw.polygon([(109, 100), (152, 119), (109, 138)], outline="ORANGE", fill=0)
@@ -77,10 +77,9 @@ class IOTestView(View):
         self.draw.ellipse([(61, 99), (99, 141)], outline="ORANGE", fill=0)
         self.draw.ellipse([(198, 40), (238, 80)], outline="ORANGE", fill=0)
         self.draw.ellipse([(198, 95), (238, 135)], outline="ORANGE", fill=0)
-        self.draw.text((200, 160), "EXIT", fill="ORANGE", font=View.IMPACT18)
+        self.draw_text("EXIT", 160, 'impact', 18, width=200)
         self.draw.rectangle((30, 205, 210, 235), outline="ORANGE", fill="BLACK")
-        tw, th = self.draw.textsize(self.qr_text, font=View.IMPACT22)
-        self.draw.text(((self.WIDTH - tw) / 2, 205), self.qr_text, fill="ORANGE", font=View.IMPACT22)
+        self.draw_text(self.qr_text, 205, 'impact', 22)
         View.DispShowImage()
         self.redraw_complete = True
 
