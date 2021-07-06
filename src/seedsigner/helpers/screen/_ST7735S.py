@@ -118,7 +118,7 @@ def image_to_data(image, rotation=0):
 class ST7735(object):
     """Representation of an ST7735 TFT LCD."""
 
-    def __init__(self, port, cs, dc, backlight=None, rst=None, width=ST7735_TFTWIDTH,
+    def __init__(self, spi, dc, backlight=None, rst=None, width=ST7735_TFTWIDTH,
                  height=ST7735_TFTHEIGHT, rotation=90, offset_left=None, offset_top=None, invert=True, spi_speed_hz=4000000):
         """Create an instance of the display using SPI communication.
 
@@ -143,7 +143,7 @@ class ST7735(object):
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
 
-        self._spi = spidev.SpiDev(port, cs)
+        self._spi = spi
         self._spi.mode = 0
         self._spi.lsbfirst = False
         self._spi.max_speed_hz = spi_speed_hz
