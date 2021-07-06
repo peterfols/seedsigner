@@ -40,7 +40,7 @@ class View:
         View.canvas = Image.new('RGB', (View.canvas_width, View.canvas_height))
         View.draw = ImageDraw.Draw(View.canvas)
 
-        # cls.WIDTHxcls.WIDTH display with hardware SPI:
+        # 240x240 display with hardware SPI:
         View.bus = 0
         View.device = 0
         View.disp = Screen(SPI.SpiDev(View.bus, View.device), View.RST, View.DC, View.BL)
