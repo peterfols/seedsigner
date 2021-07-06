@@ -82,6 +82,10 @@ class View:
         View.draw.text(width, height, text, fill=fill, font=cls.get_font(font, font_size))
 
     @classmethod
+    def draw_polygon(cls, dimensions, outline="ORANGE", fill="ORANGE"):
+        View.draw.polygon([cls.scale_dimension(dim) for dim in dimensions], outline=outline, fill=fill)
+
+    @classmethod
     def draw_modal(cls, lines=[], title="", bottom="") -> None:
 
         View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)

@@ -260,8 +260,8 @@ class SeedToolsView(View):
             self.draw_gather_words()
 
     def gather_words_up(self):
-        View.draw.polygon([(8 + ((len(self.letters) - 1) * 30), 85), (14 + ((len(self.letters) - 1) * 30), 69),
-                           (20 + ((len(self.letters) - 1) * 30), 85)], outline="ORANGE", fill="ORANGE")
+        View.draw_polygon([(8 + ((len(self.letters) - 1) * 30), 85), (14 + ((len(self.letters) - 1) * 30), 69),
+                           (20 + ((len(self.letters) - 1) * 30), 85)])
         View.DispShowImage()
 
         self.calc_possible_alphabet()
@@ -275,8 +275,8 @@ class SeedToolsView(View):
                 print("not found error")
 
     def gather_words_down(self):
-        View.draw.polygon([(8 + ((len(self.letters) - 1) * 30), 148), (14 + ((len(self.letters) - 1) * 30), 164),
-                           (20 + ((len(self.letters) - 1) * 30), 148)], outline="ORANGE", fill="ORANGE")
+        View.draw_polygon([(8 + ((len(self.letters) - 1) * 30), 148), (14 + ((len(self.letters) - 1) * 30), 164),
+                           (20 + ((len(self.letters) - 1) * 30), 148)])
         View.DispShowImage()
 
         self.calc_possible_alphabet()
@@ -367,10 +367,8 @@ class SeedToolsView(View):
 
             if idx + 1 == len(self.letters):
                 # draw arrows only above last/active letter
-                View.draw.polygon([(8 + (idx * 30), 85), (14 + (idx * 30), 69), (20 + (idx * 30), 85)],
-                                  outline="ORANGE", fill="BLACK")
-                View.draw.polygon([(8 + (idx * 30), 148), (14 + (idx * 30), 164), (20 + (idx * 30), 148)],
-                                  outline="ORANGE", fill="BLACK")
+                View.draw_polygon([(8 + (idx * 30), 85), (14 + (idx * 30), 69), (20 + (idx * 30), 85)], fill="BLACK")
+                View.draw_polygon([(8 + (idx * 30), 148), (14 + (idx * 30), 164), (20 + (idx * 30), 148)], fill="BLACK")
 
         View.DispShowImage()
 
