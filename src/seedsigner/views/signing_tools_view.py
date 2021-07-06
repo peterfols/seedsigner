@@ -102,34 +102,23 @@ class SigningToolsView(View):
 
     def display_transaction_information(self, wallet) -> None:
         self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
-        tw, th = self.draw.textsize("Confirm last 13 chars", font=View.IMPACT22)
-        self.draw.text(((self.WIDTH - tw) / 2, 5), "Confirm last 13 chars", fill="ORANGE", font=View.IMPACT22)
-        tw, th = self.draw.textsize("of the receiving address:", font=View.IMPACT22)
-        self.draw.text(((self.WIDTH - tw) / 2, 30), "of the receiving address:", fill="ORANGE", font=View.IMPACT22)
-        tw, th = self.draw.textsize(wallet.destinationaddress[-13:], font=View.IMPACT22)
-        self.draw.text(((self.WIDTH - tw) / 2, 55), wallet.destinationaddress[-13:], fill="ORANGE", font=View.IMPACT22)
-        tw, th = self.draw.textsize("Amount Sending:", font=View.IMPACT22)
-        self.draw.text(((self.WIDTH - tw) / 2, 90), "Amount Sending:", fill="ORANGE", font=View.IMPACT22)
+        View.draw_text("Confirm last 13 chars", 5, 'impact', 22)
+        View.draw_text("of the receiving address:", 30, 'impact', 22)
+        View.draw_text(wallet.destinationaddress[-13:], 55, 'impact', 22)
+        View.draw_text("Amount Sending:", 90, 'impact', 22)
         if wallet.spend == 0:
-            tw, th = self.draw.textsize("Self-Transfer (not parsed)", font=View.IMPACT22)
-            self.draw.text(((self.WIDTH - tw) / 2, 115), "Self-Transfer (not parsed)", fill="ORANGE", font=View.IMPACT22)
+            View.draw_text("Self-Transfer (not parsed)", 115, 'impact', 22)
         else:
-            tw, th = self.draw.textsize(str(wallet.spend) + " satoshis", font=View.IMPACT22)
-            self.draw.text(((self.WIDTH - tw) / 2, 115), str(wallet.spend) + " satoshis", fill="ORANGE", font=View.IMPACT22)
-        tw, th = self.draw.textsize("Plus a fee of:", font=View.IMPACT22)
-        self.draw.text(((self.WIDTH - tw) / 2, 150), "Plus a fee of:", fill="ORANGE", font=View.IMPACT22)
-        tw, th = self.draw.textsize(str(int(wallet.fee)) + " satoshis", font=View.IMPACT22)
-        self.draw.text(((self.WIDTH - tw) / 2, 175), str(int(wallet.fee)) + " satoshis", fill="ORANGE", font=View.IMPACT22)
-        tw, th = self.draw.textsize("Left to Exit, Right to Continue", font=View.IMPACT18)
-        self.draw.text(((self.WIDTH - tw) / 2, 215), "Left to Exit, Right to Continue", fill="ORANGE", font=View.IMPACT18)
+            View.draw_text(str(wallet.spend) + " satoshis", 115, 'impact', 22)
+        View.draw_text("Plus a fee of:", 150, 'impact', 22)
+        View.draw_text(str(int(wallet.fee)) + " satoshis", 175, 'impact', 22)
+        View.draw_text("Left to Exit, Right to Continue", 175, 'impact', 18)
         View.DispShowImage()
 
     @classmethod
     def qr_gen_status(cls, percentage):
         View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
-        tw, th = View.draw.textsize("QR Generation", font=View.IMPACT25)
-        View.draw.text(((cls.WIDTH - tw) / 2, 90), "QR Generation", fill="ORANGE", font=View.IMPACT25)
-        tw, th = View.draw.textsize(str(round(percentage)) + "% Complete", font=View.IMPACT25)
-        View.draw.text(((cls.WIDTH - tw) / 2, 125), str(round(percentage)) + "% Complete", fill="ORANGE", font=View.IMPACT25)
+        View.draw_text("QR Generation", 90, 'impact', 25)
+        View.draw_text(str(round(percentage)) + "% Complete", 125, 'impact', 25)
         View.DispShowImage()
 
