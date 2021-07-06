@@ -68,7 +68,7 @@ class IOTestView(View):
     def draw_io_screen(self):
         self.redraw_complete = False
         self.redraw = False
-        self.empty_screen()
+        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
         self.draw_text("Input/Output Check:", 5, 'impact', 18, width=45)
         self.draw_polygon([(61, 89), (80, 46), (99, 89)], fill=0)
         self.draw_polygon([(51, 100), (8, 119), (51, 138)], fill=0)

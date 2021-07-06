@@ -101,7 +101,7 @@ class SigningToolsView(View):
 
 
     def display_transaction_information(self, wallet) -> None:
-        self.empty_screen()
+        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
         View.draw_text("Confirm last 13 chars", 5, 'impact', 22)
         View.draw_text("of the receiving address:", 30, 'impact', 22)
         View.draw_text(wallet.destinationaddress[-13:], 55, 'impact', 22)
@@ -117,7 +117,7 @@ class SigningToolsView(View):
 
     @classmethod
     def qr_gen_status(cls, percentage):
-        View.empty_screen()
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
         View.draw_text("QR Generation", 90, 'impact', 25)
         View.draw_text(str(round(percentage)) + "% Complete", 125, 'impact', 25)
         View.DispShowImage()
