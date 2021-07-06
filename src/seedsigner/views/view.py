@@ -9,6 +9,7 @@ from seedsigner.helpers.screen import Screen, get_screen_dimensions, scale_dimen
 ### Generic View Class to Instatiate Display
 ### Static Class variables are used for display
 ### Designed to be inherited for other view classes, but not required
+DEFAULT_COLOR = "ORANGE"
 
 class View:
     WIDTH, HEIGHT = get_screen_dimensions()
@@ -69,7 +70,7 @@ class View:
             return ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/courbd.ttf', size)
 
     @classmethod
-    def draw_text(cls, text, height, font, font_size, align='center', fill='ORANGE', width=None):
+    def draw_text(cls, text, height, font, font_size, align='center', fill=DEFAULT_COLOR, width=None):
         font_size = cls.scale_dimension(font_size)
         height = cls.scale_dimension(height)
         width = cls.scale_dimension(width) if width else None
@@ -82,13 +83,24 @@ class View:
         View.draw.text(width, height, text, fill=fill, font=cls.get_font(font, font_size))
 
     @classmethod
-    def draw_polygon(cls, dimensions, outline="ORANGE", fill="ORANGE"):
+    def draw_polygon(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
         View.draw.polygon([cls.scale_dimension(dim) for dim in dimensions], outline=outline, fill=fill)
+
+    @classmethod
+    def draw_rectangle(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
+        if dimensions != (0, 0, View.canvas_width, View.canvas_height):
+            dimensions = [cls.scale_dimension(dim) for dim in dimensions]
+        return cls.draw.rectangle(dimensions, outline=outline, fill=fill)
+
+    @classmethod
+    def draw_ellipse(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
+        dimensions = [cls.scale_dimension(dim) for dim in dimensions]
+        return cls.draw.ellipse(dimensions, outline=outline, fill=fill)
 
     @classmethod
     def draw_modal(cls, lines=[], title="", bottom="") -> None:
 
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
         if len(title) > 0:
             cls.draw_text(title, 2, 'impact', 22)
@@ -123,7 +135,7 @@ class View:
     @classmethod
     def draw_prompt_custom(cls, a_txt, b_txt, c_txt, lines=[], title="", bottom="") -> None:
 
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
         if len(title) > 0:
             cls.draw_text(title, 2, 'impact', 22)
@@ -161,7 +173,7 @@ class View:
     @classmethod
     def display_power_off_screen(cls):
 
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
         cls.draw_text("Powering Down...", 45, 'impact', 22)
         cls.draw_text("Please wait about", 100, 'impact', 20)
@@ -171,5 +183,5 @@ class View:
 
     @classmethod
     def display_blank_screen(cls):
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
         View.DispShowImage()

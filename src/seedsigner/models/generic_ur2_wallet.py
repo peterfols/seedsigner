@@ -116,7 +116,7 @@ class GenericUR2Wallet(Wallet):
 
             # if all frames have not all been captured, display progress to screen/display
             if not self.capture_complete():
-                View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+                View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
                 View.draw_text("Collecting QR Codes:", 15, 'impact', 25)
                 View.draw_text(str(round(self.percentage_complete * 100)) + "% Complete", 125, 'impact', 22)
                 View.DispShowImage()

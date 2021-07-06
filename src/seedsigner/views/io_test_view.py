@@ -68,30 +68,30 @@ class IOTestView(View):
     def draw_io_screen(self):
         self.redraw_complete = False
         self.redraw = False
-        self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
         self.draw_text("Input/Output Check:", 5, 'impact', 18, width=45)
         self.draw_polygon([(61, 89), (80, 46), (99, 89)], fill=0)
         self.draw_polygon([(51, 100), (8, 119), (51, 138)], fill=0)
         self.draw_polygon([(109, 100), (152, 119), (109, 138)], fill=0)
         self.draw_polygon([(61, 151), (80, 193), (99, 151)], fill=0)
-        self.draw.ellipse([(61, 99), (99, 141)], outline="ORANGE", fill=0)
-        self.draw.ellipse([(198, 40), (238, 80)], outline="ORANGE", fill=0)
-        self.draw.ellipse([(198, 95), (238, 135)], outline="ORANGE", fill=0)
+        self.draw_ellipse([(61, 99), (99, 141)], fill=0)
+        self.draw_ellipse([(198, 40), (238, 80)],  fill=0)
+        self.draw_ellipse([(198, 95), (238, 135)],  fill=0)
         self.draw_text("EXIT", 160, 'impact', 18, width=200)
-        self.draw.rectangle((30, 205, 210, 235), outline="ORANGE", fill="BLACK")
+        self.draw_rectangle((30, 205, 210, 235),  fill="BLACK")
         self.draw_text(self.qr_text, 205, 'impact', 22)
         View.DispShowImage()
         self.redraw_complete = True
 
     def a_button(self):
         if self.redraw is False and self.redraw_complete is True:
-            self.draw.ellipse([(198, 40), (238, 80)], outline="ORANGE", fill="ORANGE")
+            self.draw_ellipse([(198, 40), (238, 80)])
             View.DispShowImage()
             self.redraw = True
 
     def b_button(self):
         if self.redraw is False and self.redraw_complete is True:
-            self.draw.ellipse([(198, 95), (238, 135)], outline="ORANGE", fill="ORANGE")
+            self.draw_ellipse([(198, 95), (238, 135)])
             View.DispShowImage()
             self.redraw = True
 
@@ -125,14 +125,14 @@ class IOTestView(View):
         
     def press_button(self):
         if self.redraw is False and self.redraw_complete is True:
-            self.draw.ellipse([(61, 99), (99, 141)], outline="ORANGE", fill="ORANGE")
+            self.draw_ellipse([(61, 99), (99, 141)])
             View.DispShowImage()
             self.redraw = True
     
     def draw_scan_detected(self):
         self.qr_text = "QR Scanned"
         if self.redraw is False and self.redraw_complete is True:
-            self.draw.rectangle((30, 205, 210, 235), outline="ORANGE", fill="ORANGE")
+            self.draw_rectangle((30, 205, 210, 235))
             self.draw_text(self.qr_text, 205, 'impact', 22, fill='BLACK')
             View.DispShowImage()
             self.redraw = True

@@ -348,7 +348,7 @@ class SeedToolsView(View):
 
     def draw_gather_words(self):
 
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
         View.draw_text("Seed Word: " + str(len(self.words) + 1), 2, 'impact', 18, width=75)
         View.draw_text("Seed Word: " + str(len(self.words) + 1), 210, 'impact', 18, width=15)
 
@@ -387,7 +387,7 @@ class SeedToolsView(View):
         splitseed = finalseed.split()
         last_word = splitseed[-1]
 
-        self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
         View.draw_text("The final word is :", 60, "impact", 23)
         View.draw_text(last_word, 90, "impact", 50)
         View.draw_text("Right to Continue", 210, "impact", 18, width=73)
@@ -520,7 +520,7 @@ class SeedToolsView(View):
 
     def draw_dice(self, dice_selected):
 
-        self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
         self.draw_text("Dice roll: " + str(self.roll_number) + "/99", 5, 'impact', 26, width=45)
 
         # when dice is selected, rect fill will be orange and ellipse will be black, ellipse outline will be the black
@@ -528,81 +528,81 @@ class SeedToolsView(View):
 
         # dice 1
         if dice_selected == 1:
-            self.draw.rectangle((5, 50, 75, 120), outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(34, 79), (46, 91)], outline="BLACK", fill="BLACK")
+            self.draw_rectangle((5, 50, 75, 120))
+            self.draw_ellipse([(34, 79), (46, 91)], outline="BLACK", fill="BLACK")
         else:
-            self.draw.rectangle((5, 50, 75, 120), outline="ORANGE", fill="BLACK")
-            self.draw.ellipse([(34, 79), (46, 91)], outline="ORANGE", fill="ORANGE")
+            self.draw_rectangle((5, 50, 75, 120),  fill="BLACK")
+            self.draw_ellipse([(34, 79), (46, 91)])
 
         # dice 2
         if dice_selected == 2:
-            self.draw.rectangle((85, 50, 155, 120), outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(100, 60), (112, 72)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(128, 98), (140, 110)], outline="BLACK", fill="BLACK")
+            self.draw_rectangle((85, 50, 155, 120))
+            self.draw_ellipse([(100, 60), (112, 72)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(128, 98), (140, 110)], outline="BLACK", fill="BLACK")
         else:
-            self.draw.rectangle((85, 50, 155, 120), outline="ORANGE", fill="BLACK")
-            self.draw.ellipse([(100, 60), (112, 72)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(128, 98), (140, 110)], outline="ORANGE", fill="ORANGE")
+            self.draw_rectangle((85, 50, 155, 120),  fill="BLACK")
+            self.draw_ellipse([(100, 60), (112, 72)])
+            self.draw_ellipse([(128, 98), (140, 110)])
 
         # dice 3
         if dice_selected == 3:
-            self.draw.rectangle((165, 50, 235, 120), outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(180, 60), (192, 72)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(194, 79), (206, 91)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(208, 98), (220, 110)], outline="BLACK", fill="BLACK")
+            self.draw_rectangle((165, 50, 235, 120))
+            self.draw_ellipse([(180, 60), (192, 72)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(194, 79), (206, 91)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(208, 98), (220, 110)], outline="BLACK", fill="BLACK")
         else:
-            self.draw.rectangle((165, 50, 235, 120), outline="ORANGE", fill="BLACK")
-            self.draw.ellipse([(180, 60), (192, 72)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(194, 79), (206, 91)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(208, 98), (220, 110)], outline="ORANGE", fill="ORANGE")
+            self.draw_rectangle((165, 50, 235, 120),  fill="BLACK")
+            self.draw_ellipse([(180, 60), (192, 72)])
+            self.draw_ellipse([(194, 79), (206, 91)])
+            self.draw_ellipse([(208, 98), (220, 110)])
 
         # dice 4
         if dice_selected == 4:
-            self.draw.rectangle((5, 130, 75, 200), outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(20, 140), (32, 152)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(20, 174), (32, 186)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(48, 140), (60, 152)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(48, 174), (60, 186)], outline="BLACK", fill="BLACK")
+            self.draw_rectangle((5, 130, 75, 200))
+            self.draw_ellipse([(20, 140), (32, 152)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(20, 174), (32, 186)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(48, 140), (60, 152)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(48, 174), (60, 186)], outline="BLACK", fill="BLACK")
         else:
-            self.draw.rectangle((5, 130, 75, 200), outline="ORANGE", fill="BLACK")
-            self.draw.ellipse([(20, 140), (32, 152)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(20, 174), (32, 186)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(48, 140), (60, 152)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(48, 174), (60, 186)], outline="ORANGE", fill="ORANGE")
+            self.draw_rectangle((5, 130, 75, 200),  fill="BLACK")
+            self.draw_ellipse([(20, 140), (32, 152)])
+            self.draw_ellipse([(20, 174), (32, 186)])
+            self.draw_ellipse([(48, 140), (60, 152)])
+            self.draw_ellipse([(48, 174), (60, 186)])
 
         # dice 5
         if dice_selected == 5:
-            self.draw.rectangle((85, 130, 155, 200), outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(100, 140), (112, 152)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(100, 178), (112, 190)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(114, 159), (126, 171)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(128, 140), (140, 152)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(128, 178), (140, 190)], outline="BLACK", fill="BLACK")
+            self.draw_rectangle((85, 130, 155, 200))
+            self.draw_ellipse([(100, 140), (112, 152)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(100, 178), (112, 190)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(114, 159), (126, 171)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(128, 140), (140, 152)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(128, 178), (140, 190)], outline="BLACK", fill="BLACK")
         else:
-            self.draw.rectangle((85, 130, 155, 200), outline="ORANGE", fill="BLACK")
-            self.draw.ellipse([(100, 140), (112, 152)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(100, 178), (112, 190)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(114, 159), (126, 171)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(128, 140), (140, 152)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(128, 178), (140, 190)], outline="ORANGE", fill="ORANGE")
+            self.draw_rectangle((85, 130, 155, 200),  fill="BLACK")
+            self.draw_ellipse([(100, 140), (112, 152)])
+            self.draw_ellipse([(100, 178), (112, 190)])
+            self.draw_ellipse([(114, 159), (126, 171)])
+            self.draw_ellipse([(128, 140), (140, 152)])
+            self.draw_ellipse([(128, 178), (140, 190)])
 
         # dice 6
         if dice_selected == 6:
-            self.draw.rectangle((165, 130, 235, 200), outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(180, 140), (192, 152)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(180, 157), (192, 169)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(180, 174), (192, 186)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(208, 140), (220, 152)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(208, 157), (220, 169)], outline="BLACK", fill="BLACK")
-            self.draw.ellipse([(208, 174), (220, 186)], outline="BLACK", fill="BLACK")
+            self.draw_rectangle((165, 130, 235, 200))
+            self.draw_ellipse([(180, 140), (192, 152)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(180, 157), (192, 169)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(180, 174), (192, 186)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(208, 140), (220, 152)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(208, 157), (220, 169)], outline="BLACK", fill="BLACK")
+            self.draw_ellipse([(208, 174), (220, 186)], outline="BLACK", fill="BLACK")
         else:
-            self.draw.rectangle((165, 130, 235, 200), outline="ORANGE", fill="BLACK")
-            self.draw.ellipse([(180, 140), (192, 152)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(180, 157), (192, 169)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(180, 174), (192, 186)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(208, 140), (220, 152)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(208, 157), (220, 169)], outline="ORANGE", fill="ORANGE")
-            self.draw.ellipse([(208, 174), (220, 186)], outline="ORANGE", fill="ORANGE")
+            self.draw_rectangle((165, 130, 235, 200),  fill="BLACK")
+            self.draw_ellipse([(180, 140), (192, 152)])
+            self.draw_ellipse([(180, 157), (192, 169)])
+            self.draw_ellipse([(180, 174), (192, 186)])
+            self.draw_ellipse([(208, 140), (220, 152)])
+            self.draw_ellipse([(208, 157), (220, 169)])
+            self.draw_ellipse([(208, 174), (220, 186)])
 
         # bottom text
         self.draw_text("Press Control Stick to Select", 210, 'impact', 18, width=18)
@@ -653,7 +653,7 @@ class SeedToolsView(View):
                 return True
 
     def display_seed_phrase_12(self, seed_phrase, bottom="Right to Exit"):
-        self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
         View.draw_text("Selected Words", 2,'impact', 18)
 
@@ -681,7 +681,7 @@ class SeedToolsView(View):
             return "left"
 
     def display_seed_phrase_24_1(self, seed_phrase, bottom="Right to Exit"):
-        self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
         View.draw_text("Selected Words (1/2)", 2, 'impact', 18)
 
@@ -698,7 +698,7 @@ class SeedToolsView(View):
         View.draw_text("11: " + seed_phrase[10], 140, 'impact', 23,  width=120)
         View.draw_text("12: " + seed_phrase[11], 165, 'impact', 23,  width=120)
 
-        View.draw_text("Right to Continue", 210, 'impact', 18, )
+        View.draw_text("Right to Continue", 210, 'impact', 18)
         View.DispShowImage()
 
         input = self.buttons.wait_for([B.KEY_RIGHT, B.KEY_LEFT])
@@ -708,7 +708,7 @@ class SeedToolsView(View):
             return "left-1"
 
     def display_seed_phrase_24_2(self, seed_phrase, bottom):
-        self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
         View.draw_text("Selected Words (2/2)", 2, 'impact', 18)
 
