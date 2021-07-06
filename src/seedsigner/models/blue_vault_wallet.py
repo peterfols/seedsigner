@@ -132,7 +132,7 @@ class BlueVaultWallet(Wallet):
 
         return images
 
-    def set_qr_density(density):
+    def set_qr_density(self, density):
         if density == Wallet.LOW:
             self.qrsize = 100
         elif density == Wallet.HIGH:

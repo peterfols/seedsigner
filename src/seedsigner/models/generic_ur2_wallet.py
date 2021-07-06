@@ -181,7 +181,7 @@ class GenericUR2Wallet(Wallet):
     def qr_sleep(self):
         time.sleep(0.5)
 
-    def set_qr_density(density):
+    def set_qr_density(self, density):
         if density == Wallet.LOW:
             self.qrsize = 80
         elif density == Wallet.HIGH:
