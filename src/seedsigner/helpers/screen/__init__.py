@@ -1,8 +1,11 @@
 import subprocess
 from ST7789 import ST7789 as Screen
 
+dimensions_cache = None
 
-def get_screen_dimensions():
+
+def get_screen_dimensions(dimensions_cache=None):
+    if dimensions_cache: return dimensions_cache
     cmd = ['xrandr']
     cmd2 = ['grep', '*']
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
@@ -10,7 +13,8 @@ def get_screen_dimensions():
     p.stdout.close()
     resolution_string, junk = p2.communicate()
     resolution = resolution_string.split()[0]
-    return [int(x) for x in resolution.decode().split('x')]
+    dimensions_cache = [int(x) for x in resolution.decode().split('x')]
+    return dimensions_cache
 
 
 def scale_dimension(new_scale, size, default_scale=240):
