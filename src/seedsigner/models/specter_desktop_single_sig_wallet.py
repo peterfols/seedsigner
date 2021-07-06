@@ -12,7 +12,7 @@ import textwrap
 
 class SpecterDesktopSingleSigWallet(SpecterDesktopMultisigWallet):
 
-    def __init__(self, current_network = "main", hardened_derivation="m/84h/0h/0h") -> None:
+    def __init__(self, current_network="main", hardened_derivation="m/84h/0h/0h") -> None:
         if current_network == "main":
             Wallet.__init__(self, current_network, "m/84h/0h/0h")
         elif current_network == "test":
