@@ -348,7 +348,7 @@ class SeedToolsView(View):
 
     def draw_gather_words(self):
 
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        View.empty_screen()
         View.draw_text("Seed Word: " + str(len(self.words) + 1), 2, 'impact', 18, width=75)
         View.draw_text("Seed Word: " + str(len(self.words) + 1), 210, 'impact', 18, width=15)
 
@@ -387,7 +387,7 @@ class SeedToolsView(View):
         splitseed = finalseed.split()
         last_word = splitseed[-1]
 
-        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        self.empty_screen()
         View.draw_text("The final word is :", 60, "impact", 23)
         View.draw_text(last_word, 90, "impact", 50)
         View.draw_text("Right to Continue", 210, "impact", 18, width=73)
@@ -520,7 +520,7 @@ class SeedToolsView(View):
 
     def draw_dice(self, dice_selected):
 
-        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        self.empty_screen()
         self.draw_text("Dice roll: " + str(self.roll_number) + "/99", 5, 'impact', 26, width=45)
 
         # when dice is selected, rect fill will be orange and ellipse will be black, ellipse outline will be the black
@@ -653,7 +653,7 @@ class SeedToolsView(View):
                 return True
 
     def display_seed_phrase_12(self, seed_phrase, bottom="Right to Exit"):
-        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        self.empty_screen()
 
         View.draw_text("Selected Words", 2,'impact', 18)
 
@@ -681,7 +681,7 @@ class SeedToolsView(View):
             return "left"
 
     def display_seed_phrase_24_1(self, seed_phrase, bottom="Right to Exit"):
-        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        self.empty_screen()
 
         View.draw_text("Selected Words (1/2)", 2, 'impact', 18)
 
@@ -708,7 +708,7 @@ class SeedToolsView(View):
             return "left-1"
 
     def display_seed_phrase_24_2(self, seed_phrase, bottom):
-        self.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        self.empty_screen()
 
         View.draw_text("Selected Words (2/2)", 2, 'impact', 18)
 
