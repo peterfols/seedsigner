@@ -84,12 +84,12 @@ class View:
 
     @classmethod
     def draw_polygon(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
-        View.draw.polygon([cls.scale_dimension(dim) for dim in dimensions], outline=outline, fill=fill)
+        View.draw.polygon([(cls.scale_dimension(dim[0]), cls.scale_dimension(dim[1])) for dim in dimensions], outline=outline, fill=fill)
 
     @classmethod
     def draw_rectangle(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR, resize=True):
         if resize:
-            dimensions = [cls.scale_dimension(dim) for dim in dimensions]
+            dimensions = [(cls.scale_dimension(dim[0]), cls.scale_dimension(dim[1])) for dim in dimensions]
         return cls.draw.rectangle(dimensions, outline=outline, fill=fill)
 
     @classmethod
@@ -98,7 +98,7 @@ class View:
 
     @classmethod
     def draw_ellipse(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
-        dimensions = [cls.scale_dimension(dim) for dim in dimensions]
+        dimensions = [(cls.scale_dimension(dim[0]), cls.scale_dimension(dim[1])) for dim in dimensions]
         return cls.draw.ellipse(dimensions, outline=outline, fill=fill)
 
     @classmethod
