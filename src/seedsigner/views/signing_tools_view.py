@@ -29,14 +29,14 @@ class SigningToolsView(View):
             View.DispShowImage(xpub_images[0])
         while True:
             if len(xpub_images) != 1:
-                if step == False:
+                if step is False:
                     View.DispShowImage(xpub_images[cnt])
                 else:
                     frame_text = (str(cnt+1) + " of " + str(len(xpub_images)))
                     View.DispShowImageWithText(xpub_images[cnt], frame_text)
                     time.sleep(0.3)
                     # View.DispShowImage(xpub_images[cnt])
-            if step == False:
+            if step is False:
                 cnt += 1
                 if cnt >= len(xpub_images):
                     cnt = 0
@@ -71,13 +71,13 @@ class SigningToolsView(View):
         cnt = 0
         step = False
         while True:
-            if step == False:
+            if step is False:
                 View.DispShowImage(images[cnt])
             else:
                 frame_text = (str(cnt+1) + " of " + str(len(images)))
                 View.DispShowImageWithText(images[cnt], frame_text)
                 time.sleep(0.3)
-            if step == False:
+            if step is False:
                 cnt += 1
                 if cnt >= len(images):
                     cnt = 0

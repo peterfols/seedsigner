@@ -173,7 +173,7 @@ class Controller:
         # display seed phrase (24 words)
         while True:
             ret_val = self.seed_tools_view.display_seed_phrase(seed_phrase, "Right to Continue")
-            if ret_val == True:
+            if ret_val is True:
                 break
 
         # Ask to save seed
@@ -199,12 +199,12 @@ class Controller:
 
         slot_num = ret_val
 
-        if self.storage.check_slot(slot_num) == True:
+        if self.storage.check_slot(slot_num) is True:
             # show seed phrase
             # display seed phrase (24 words)
             while True:
                 r = self.seed_tools_view.display_seed_phrase(self.storage.get_seed_phrase(abs(slot_num)), "Right to Continue")
-                if r == True:
+                if r is True:
                     break
             return Path.MAIN_MENU
         else:
@@ -268,7 +268,7 @@ class Controller:
             # check if seed phrase is valid
             self.menu_view.draw_modal(["Validating ..."])
             is_valid = self.storage.check_if_seed_valid(seed_phrase)
-            if is_valid == False:
+            if is_valid is False:
                 self.menu_view.draw_modal(["Seed Invalid", "check seed phrase", "and try again"], "", "Right to Continue")
                 input = self.buttons.wait_for([B.KEY_RIGHT])
                 return Path.MAIN_MENU
@@ -276,7 +276,7 @@ class Controller:
         # display seed phrase
         while True:
             r = self.seed_tools_view.display_seed_phrase(seed_phrase, "Right to See QR")
-            if r == True:
+            if r is True:
                 break
 
         self.signing_tools_view.draw_modal(["Generating QR ..."])
@@ -315,7 +315,7 @@ class Controller:
             # check if seed phrase is valid
             self.menu_view.draw_modal(["Validating ..."])
             is_valid = self.storage.check_if_seed_valid(seed_phrase)
-            if is_valid == False:
+            if is_valid is False:
                 self.menu_view.draw_modal(["Seed Invalid", "check seed phrase", "and try again"], "", "Right to Continue")
                 input = self.buttons.wait_for([B.KEY_RIGHT])
                 return Path.MAIN_MENU
@@ -323,7 +323,7 @@ class Controller:
         # display seed phrase
         while True:
             r = self.seed_tools_view.display_seed_phrase(seed_phrase, "Right to Scan QR")
-            if r == True:
+            if r is True:
                 break
             else:
                 return Path.SIGNING_TOOLS_SUB_MENU
@@ -370,7 +370,7 @@ class Controller:
 
         ret_val = self.io_test_view.display_io_test_screen()
 
-        if ret_val == True:
+        if ret_val is True:
             return Path.MAIN_MENU
 
     ### Show Current Network

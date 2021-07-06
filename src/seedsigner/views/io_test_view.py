@@ -62,7 +62,7 @@ class IOTestView(View):
         except:
             data = ["nodata"]
 
-        if self.redraw == True and self.redraw_complete == True:
+        if self.redraw is True and self.redraw_complete is True:
             self.draw_io_screen()
 
     def draw_io_screen(self):
@@ -85,13 +85,13 @@ class IOTestView(View):
         self.redraw_complete = True
 
     def a_button(self):
-        if self.redraw == False and self.redraw_complete == True:
+        if self.redraw is False and self.redraw_complete is True:
             self.draw.ellipse([(198, 40), (238, 80)], outline="ORANGE", fill="ORANGE")
             View.DispShowImage()
             self.redraw = True
 
     def b_button(self):
-        if self.redraw == False and self.redraw_complete == True:
+        if self.redraw is False and self.redraw_complete is True:
             self.draw.ellipse([(198, 95), (238, 135)], outline="ORANGE", fill="ORANGE")
             View.DispShowImage()
             self.redraw = True
@@ -101,41 +101,40 @@ class IOTestView(View):
         self.controller.to_camera_queue.put(["stop"])
 
     def up_button(self):
-        if self.redraw == False and self.redraw_complete == True:
+        if self.redraw is False and self.redraw_complete is True:
             self.draw.polygon([(61, 89), (80, 46), (99, 89)], outline="ORANGE", fill="ORANGE")
             View.DispShowImage()
             self.redraw = True
         
     def down_button(self):
-        if self.redraw == False and self.redraw_complete == True:
+        if self.redraw is False and self.redraw_complete is True:
             self.draw.polygon([(61, 151), (80, 193), (99, 151)], outline="ORANGE", fill="ORANGE")
             View.DispShowImage()
             self.redraw = True
         
     def left_button(self):
-        if self.redraw == False and self.redraw_complete == True:
+        if self.redraw is False and self.redraw_complete is True:
             self.draw.polygon([(51, 100), (8, 119), (51, 138)], outline="ORANGE", fill="ORANGE")
             View.DispShowImage()
             self.redraw = True
         
     def right_button(self):
-        if self.redraw == False and self.redraw_complete == True:
+        if self.redraw is False and self.redraw_complete is True:
             self.draw.polygon([(109, 100), (152, 119), (109, 138)], outline="ORANGE", fill="ORANGE")
             View.DispShowImage()
             self.redraw = True
         
     def press_button(self):
-        if self.redraw == False and self.redraw_complete == True:
+        if self.redraw is False and self.redraw_complete is True:
             self.draw.ellipse([(61, 99), (99, 141)], outline="ORANGE", fill="ORANGE")
             View.DispShowImage()
             self.redraw = True
     
     def draw_scan_detected(self):
         self.qr_text = "QR Scanned"
-        if self.redraw == False and self.redraw_complete == True:
+        if self.redraw is False and self.redraw_complete is True:
             self.draw.rectangle((30, 205, 210, 235), outline="ORANGE", fill="ORANGE")
-            tw, th = self.draw.textsize(self.qr_text, font=View.IMPACT22)
-            self.draw.text(((self.WIDTH - tw) / 2, 205), self.qr_text, fill="BLACK", font=View.IMPACT22)
+            self.draw_text(self.qr_text, 205, 'impact', 22, fill='BLACK')
             View.DispShowImage()
             self.redraw = True
         

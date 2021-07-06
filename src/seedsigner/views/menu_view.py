@@ -192,11 +192,11 @@ class MenuView(View):
                 lines[3] = "Display Seed Slot #3" # replace
         elif type == 2:
             # Show only free slots
-            if storage.check_slot_1() == False:
+            if storage.check_slot_1() is False:
                 lines.append("Use Seed Slot #1")
-            if storage.check_slot_2() == False:
+            if storage.check_slot_2() is False:
                 lines.append("Use Seed Slot #2")
-            if storage.check_slot_3() == False:
+            if storage.check_slot_3() is False:
                 lines.append("Use Seed Slot #3")
             if storage.num_of_free_slots() == 0:
                 return 0
@@ -319,7 +319,7 @@ class MenuView(View):
 
     def draw_menu_text(self, x, y, line, selected) -> None:
 
-        if selected == True:
+        if selected is True:
             View.draw.rectangle((5, y-5, 235, y+30), outline=0, fill="ORANGE")
             View.draw_text(line, y, 'impact', 20, width=x, fill='BLACK')
         else:

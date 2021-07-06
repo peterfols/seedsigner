@@ -356,8 +356,7 @@ class SeedToolsView(View):
         self.possible_words = [i for i in SeedToolsView.SEEDWORDS if i.startswith("".join(self.letters))]
         if len(self.possible_words) >= 1:
             for idx, word in enumerate(self.possible_words, start=0):
-                word_offset = 223 - View.IMPACT25.getsize(word)[0]
-                View.draw.text((word_offset, 39 + (60 * idx)), word + " -", fill="ORANGE", font=View.IMPACT25)
+                View.draw_text(word + " -", 39 + (60 * idx), 'impact', 25, align='right')
                 if idx >= 2:
                     break
 
@@ -425,7 +424,7 @@ class SeedToolsView(View):
             elif input == B.KEY_PRESS:
                 ret_val = self.dice_arrow_press()
 
-            if ret_val == False:
+            if ret_val is False:
                 return []
 
             if self.roll_number >= 100:
