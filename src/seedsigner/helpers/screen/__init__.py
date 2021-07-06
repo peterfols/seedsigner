@@ -4,7 +4,7 @@ from ST7789 import ST7789 as Screen
 dimensions_cache = None
 
 
-def get_screen_dimensions(dimensions_cache=None):
+def get_screen_dimensions(dimensions_cache=dimensions_cache):
     if dimensions_cache: return dimensions_cache
     cmd = ['xrandr']
     cmd2 = ['grep', '*']
@@ -18,4 +18,4 @@ def get_screen_dimensions(dimensions_cache=None):
 
 
 def scale_dimension(new_scale, size, default_scale=240):
-    return size / default_scale * new_scale
+    return int(size / default_scale * new_scale)
