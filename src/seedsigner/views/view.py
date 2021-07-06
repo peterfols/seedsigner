@@ -72,10 +72,10 @@ class View:
     def draw_text(cls, text, height, font, font_size, align='center', fill='ORANGE', width=None):
         font_size = cls.scale_dimension(font_size)
         height = cls.scale_dimension(height)
-        if align == 'center':
+        if not width and align == 'center':
             tw, th = View.draw.textsize(text, font=cls.get_font(font, font_size))
             width = (cls.WIDTH - tw) / 2
-        elif align == 'right':
+        elif not width and align == 'right':
             tw, th = cls.WIDTH - cls.get_font(font, font_size).getsize(text)[0]
             width = tw
         View.draw.text(width, height, text, fill=fill, font=cls.get_font(font, font_size))
@@ -91,7 +91,7 @@ class View:
             cls.draw_text(lines[0], 90, 'impact', 26)
         elif len(lines) == 2:
             cls.draw_text(lines[0], 90, 'impact', 22)
-            cls.draw_text(lines[0], 125, 'impact', 22)
+            cls.draw_text(lines[1], 125, 'impact', 22)
         elif len(lines) == 3:
             cls.draw_text(lines[0], 55, 'impact', 26)
             cls.draw_text(lines[1], 90, 'impact', 22)

@@ -349,8 +349,8 @@ class SeedToolsView(View):
     def draw_gather_words(self):
 
         View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
-        View.draw_text("Seed Word: " + str(len(self.words) + 1), 2, 'impact', 18, align=None, width=75)
-        View.draw_text("Seed Word: " + str(len(self.words) + 1), 210, 'impact', 18, align=None, width=15)
+        View.draw_text("Seed Word: " + str(len(self.words) + 1), 2, 'impact', 18, width=75)
+        View.draw_text("Seed Word: " + str(len(self.words) + 1), 210, 'impact', 18, width=15)
 
         # draw possible words (3 at most)
         self.possible_words = [i for i in SeedToolsView.SEEDWORDS if i.startswith("".join(self.letters))]
@@ -364,7 +364,7 @@ class SeedToolsView(View):
         # draw letter and arrows
         for idx, letter in enumerate(self.letters, start=0):
             tw, th = View.draw.textsize(letter, font=View.get_font('impact', View.scale_dimension(35)))
-            View.draw_text(letter, 92, 'impact', 25, align=None, width=((idx * View.scale_dimension(30)) + ((View.scale_dimension(30) - tw) / 2)))
+            View.draw_text(letter, 92, 'impact', 25, width=((idx * View.scale_dimension(30)) + ((View.scale_dimension(30) - tw) / 2)))
 
             if idx + 1 == len(self.letters):
                 # draw arrows only above last/active letter
@@ -393,7 +393,7 @@ class SeedToolsView(View):
         self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
         View.draw_text("The final word is :", 60, "impact", 23)
         View.draw_text(last_word, 90, "impact", 50)
-        View.draw_text("Right to Continue", 210, "impact", 18, align=None, width=73)
+        View.draw_text("Right to Continue", 210, "impact", 18, width=73)
         View.DispShowImage()
 
         input = self.buttons.wait_for([B.KEY_RIGHT])
@@ -524,7 +524,7 @@ class SeedToolsView(View):
     def draw_dice(self, dice_selected):
 
         self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
-        self.draw.text((45, 5), "Dice roll: " + str(self.roll_number) + "/99", fill="ORANGE", font=View.IMPACT26)
+        self.draw_text("Dice roll: " + str(self.roll_number) + "/99", 5, 'impact', 26, width=45)
 
         # when dice is selected, rect fill will be orange and ellipse will be black, ellipse outline will be the black
         # when dice is not selected, rect will will be black and ellipse will be orange, ellipse outline will be orange
@@ -608,7 +608,7 @@ class SeedToolsView(View):
             self.draw.ellipse([(208, 174), (220, 186)], outline="ORANGE", fill="ORANGE")
 
         # bottom text
-        self.draw.text((18, 210), "Press Control Stick to Select", fill="ORANGE", font=View.IMPACT18)
+        self.draw_text("Press Control Stick to Select", 210, 'impact', 18, width=18)
         View.DispShowImage()
 
         self.dice_selected = dice_selected
@@ -660,17 +660,17 @@ class SeedToolsView(View):
 
         View.draw_text("Selected Words", 2,'impact', 18)
 
-        View.draw_text("1: " + seed_phrase[0], 40, 'impact', 23, align=None, width=2)
-        View.draw_text("2: " + seed_phrase[1], 65, 'impact', 23, align=None, width=2)
-        View.draw_text("3: " + seed_phrase[2], 90, 'impact', 23, align=None, width=2)
-        View.draw_text("4: " + seed_phrase[3], 115, 'impact', 23, align=None, width=2)
-        View.draw_text("5: " + seed_phrase[4], 140, 'impact', 23, align=None, width=2)
-        View.draw_text("6: " + seed_phrase[5], 165, 'impact', 23, align=None, width=2)
-        View.draw_text("7: " + seed_phrase[6], 40, 'impact', 23, align=None, width=120)
-        View.draw_text("8: " + seed_phrase[7], 65, 'impact', 23, align=None, width=120)
-        View.draw_text("9: " + seed_phrase[8], 90, 'impact', 23, align=None, width=120)
-        View.draw_text("10: " + seed_phrase[9], 115, 'impact', 23, align=None, width=120)
-        View.draw_text("11: " + seed_phrase[10], 140, 'impact', 23, align=None, width=120)
+        View.draw_text("1: " + seed_phrase[0], 40, 'impact', 23, width=2)
+        View.draw_text("2: " + seed_phrase[1], 65, 'impact', 23,  width=2)
+        View.draw_text("3: " + seed_phrase[2], 90, 'impact', 23,  width=2)
+        View.draw_text("4: " + seed_phrase[3], 115, 'impact', 23,  width=2)
+        View.draw_text("5: " + seed_phrase[4], 140, 'impact', 23,  width=2)
+        View.draw_text("6: " + seed_phrase[5], 165, 'impact', 23,  width=2)
+        View.draw_text("7: " + seed_phrase[6], 40, 'impact', 23,  width=120)
+        View.draw_text("8: " + seed_phrase[7], 65, 'impact', 23,  width=120)
+        View.draw_text("9: " + seed_phrase[8], 90, 'impact', 23,  width=120)
+        View.draw_text("10: " + seed_phrase[9], 115, 'impact', 23,  width=120)
+        View.draw_text("11: " + seed_phrase[10], 140, 'impact', 23,  width=120)
         if len(seed_phrase) >= 12:
             View.draw_text("12: " + seed_phrase[11], 165, 'impact', 120)
 
@@ -688,18 +688,18 @@ class SeedToolsView(View):
 
         View.draw_text("Selected Words (1/2)", 2, 'impact', 18)
 
-        View.draw_text("1: " + seed_phrase[0], 40, 'impact', 23, align=None, width=2)
-        View.draw_text("2: " + seed_phrase[1], 65, 'impact', 23, align=None, width=2)
-        View.draw_text("3: " + seed_phrase[2], 90, 'impact', 23, align=None, width=2)
-        View.draw_text("4: " + seed_phrase[3], 115, 'impact', 23, align=None, width=2)
-        View.draw_text("5: " + seed_phrase[4], 140, 'impact', 23, align=None, width=2)
-        View.draw_text("6: " + seed_phrase[5], 165, 'impact', 23, align=None, width=2)
-        View.draw_text("7: " + seed_phrase[6], 40, 'impact', 23, align=None, width=120)
-        View.draw_text("8: " + seed_phrase[7], 65, 'impact', 23, align=None, width=120)
-        View.draw_text("9: " + seed_phrase[8], 90, 'impact', 23, align=None, width=120)
-        View.draw_text("10: " + seed_phrase[9], 115, 'impact', 23, align=None, width=120)
-        View.draw_text("11: " + seed_phrase[10], 140, 'impact', 23, align=None, width=120)
-        View.draw_text("12: " + seed_phrase[11], 165, 'impact', 23, align=None, width=120)
+        View.draw_text("1: " + seed_phrase[0], 40, 'impact', 23,  width=2)
+        View.draw_text("2: " + seed_phrase[1], 65, 'impact', 23,  width=2)
+        View.draw_text("3: " + seed_phrase[2], 90, 'impact', 23,  width=2)
+        View.draw_text("4: " + seed_phrase[3], 115, 'impact', 23,  width=2)
+        View.draw_text("5: " + seed_phrase[4], 140, 'impact', 23,  width=2)
+        View.draw_text("6: " + seed_phrase[5], 165, 'impact', 23,  width=2)
+        View.draw_text("7: " + seed_phrase[6], 40, 'impact', 23,  width=120)
+        View.draw_text("8: " + seed_phrase[7], 65, 'impact', 23,  width=120)
+        View.draw_text("9: " + seed_phrase[8], 90, 'impact', 23,  width=120)
+        View.draw_text("10: " + seed_phrase[9], 115, 'impact', 23,  width=120)
+        View.draw_text("11: " + seed_phrase[10], 140, 'impact', 23,  width=120)
+        View.draw_text("12: " + seed_phrase[11], 165, 'impact', 23,  width=120)
 
         View.draw_text("Right to Continue", 210, 'impact', 18, )
         View.DispShowImage()
@@ -715,18 +715,18 @@ class SeedToolsView(View):
 
         View.draw_text("Selected Words (2/2)", 2, 'impact', 18)
 
-        View.draw_text("13: " + seed_phrase[12], 40, 'impact', 23, align=None, width=2)
-        View.draw_text("14: " + seed_phrase[13], 65, 'impact', 23, align=None, width=2)
-        View.draw_text("15: " + seed_phrase[14], 90, 'impact', 23, align=None, width=2)
-        View.draw_text("16: " + seed_phrase[15], 115, 'impact', 23, align=None, width=2)
-        View.draw_text("17: " + seed_phrase[16], 140, 'impact', 23, align=None, width=2)
-        View.draw_text("18: " + seed_phrase[17], 165, 'impact', 23, align=None, width=2)
-        View.draw_text("19: " + seed_phrase[18], 40, 'impact', 23, align=None, width=120)
-        View.draw_text("20: " + seed_phrase[19], 65, 'impact', 23, align=None, width=120)
-        View.draw_text("21: " + seed_phrase[20], 90, 'impact', 23, align=None, width=120)
-        View.draw_text("22: " + seed_phrase[21], 115, 'impact', 23, align=None, width=120)
-        View.draw_text("23: " + seed_phrase[22], 140, 'impact', 23, align=None, width=120)
-        View.draw_text("24: " + seed_phrase[23], 165, 'impact', 23, align=None, width=120)
+        View.draw_text("13: " + seed_phrase[12], 40, 'impact', 23,  width=2)
+        View.draw_text("14: " + seed_phrase[13], 65, 'impact', 23,  width=2)
+        View.draw_text("15: " + seed_phrase[14], 90, 'impact', 23,  width=2)
+        View.draw_text("16: " + seed_phrase[15], 115, 'impact', 23,  width=2)
+        View.draw_text("17: " + seed_phrase[16], 140, 'impact', 23,  width=2)
+        View.draw_text("18: " + seed_phrase[17], 165, 'impact', 23,  width=2)
+        View.draw_text("19: " + seed_phrase[18], 40, 'impact', 23,  width=120)
+        View.draw_text("20: " + seed_phrase[19], 65, 'impact', 23,  width=120)
+        View.draw_text("21: " + seed_phrase[20], 90, 'impact', 23,  width=120)
+        View.draw_text("22: " + seed_phrase[21], 115, 'impact', 23,  width=120)
+        View.draw_text("23: " + seed_phrase[22], 140, 'impact', 23,  width=120)
+        View.draw_text("24: " + seed_phrase[23], 165, 'impact', 23,  width=120)
 
         View.draw_text(bottom, 210, 'impact', 18)
         View.DispShowImage()

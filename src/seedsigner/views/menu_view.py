@@ -321,7 +321,7 @@ class MenuView(View):
 
         if selected == True:
             View.draw.rectangle((5, y-5, 235, y+30), outline=0, fill="ORANGE")
-            View.draw_text(line, y, 'impact', 20, align=None, width=x, fill='BLACK')
+            View.draw_text(line, y, 'impact', 20, width=x, fill='BLACK')
         else:
-            View.draw_text(line, y, 'impact', 20, align=None, width=x)
+            View.draw_text(line, y, 'impact', 20, width=x)
         return
