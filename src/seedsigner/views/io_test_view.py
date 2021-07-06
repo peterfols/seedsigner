@@ -75,10 +75,10 @@ class IOTestView(View):
         self.draw_polygon([(109, 100), (152, 119), (109, 138)], fill=0)
         self.draw_polygon([(61, 151), (80, 193), (99, 151)], fill=0)
         self.draw_ellipse([(61, 99), (99, 141)], fill=0)
-        self.draw_ellipse([(198, 40), (238, 80)],  fill=0)
-        self.draw_ellipse([(198, 95), (238, 135)],  fill=0)
+        self.draw_ellipse([(198, 40), (238, 80)], fill=0)
+        self.draw_ellipse([(198, 95), (238, 135)], fill=0)
         self.draw_text("EXIT", 160, 18, width=200)
-        self.draw_rectangle((30, 205, 210, 235),  fill="BLACK")
+        self.draw_rectangle((30, 205, 210, 235), fill="BLACK")
         self.draw_text(self.qr_text, 205, 22)
         View.DispShowImage()
         self.redraw_complete = True
