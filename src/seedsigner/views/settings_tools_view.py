@@ -56,7 +56,7 @@ class SettingsToolsView(View):
     ###
 
     def display_version_info(self):
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        View.empty_screen()
         self.draw_text("SeedSigner", 20, 'impact', 22)
         self.draw_text("Version v" + self.controller.VERSION, 55, 'impact', 22)
         self.draw_text("built for use with", 90, 'impact', 22)

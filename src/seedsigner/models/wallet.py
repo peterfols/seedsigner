@@ -152,7 +152,7 @@ class Wallet:
             # if all frames have not all been captured, display progress to screen/display
             if not self.capture_complete() and self.scan_display_working == 0:
                 self.scan_display_working = 1
-                View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+                View.empty_screen()
                 View.draw_text("Collecting QR Codes:", 15, 'impact', 22)
                 lines = textwrap.wrap("".join(self.frame_display), width=11)
                 yheight = 60

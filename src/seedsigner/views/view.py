@@ -104,7 +104,7 @@ class View:
     @classmethod
     def draw_modal(cls, lines=[], title="", bottom="") -> None:
 
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        View.empty_screen()
 
         if len(title) > 0:
             cls.draw_text(title, 2, 'impact', 22)
@@ -139,7 +139,7 @@ class View:
     @classmethod
     def draw_prompt_custom(cls, a_txt, b_txt, c_txt, lines=[], title="", bottom="") -> None:
 
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        View.empty_screen()
 
         if len(title) > 0:
             cls.draw_text(title, 2, 'impact', 22)
@@ -177,7 +177,7 @@ class View:
     @classmethod
     def display_power_off_screen(cls):
 
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        View.empty_screen()
 
         cls.draw_text("Powering Down...", 45, 'impact', 22)
         cls.draw_text("Please wait about", 100, 'impact', 20)
@@ -187,5 +187,5 @@ class View:
 
     @classmethod
     def display_blank_screen(cls):
-        View.draw_rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0, resize=False)
+        View.empty_screen()
         View.DispShowImage()
