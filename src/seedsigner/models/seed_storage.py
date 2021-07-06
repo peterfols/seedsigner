@@ -14,7 +14,8 @@ class SeedStorage:
     ### Seed Related Methods
     ###
 
-    def save_seed_phrase(self, seed_phrase = [], slot_num = 0) -> bool:
+    def save_seed_phrase(self, seed_phrase=None, slot_num=0) -> bool:
+        seed_phrase = [] if not seed_phrase else seed_phrase
         slot_idx = slot_num - 1
         if slot_idx in (0,1,2):
             self.saved_seeds[slot_idx] = seed_phrase[:]
@@ -31,7 +32,7 @@ class SeedStorage:
     def valid_seed_structure(self, seed_phrase) -> bool:
         if isinstance(seed_phrase, list):
             if len(seed_phrase) in (12,24):
-                if all(word in seed_phrase for word in SEEDWORDS):
+                if all(word in seed_phrase for word in self.SEEDWORDS):
                     return True
                 else:
                     return False

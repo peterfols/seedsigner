@@ -56,25 +56,11 @@ class SettingsToolsView(View):
     ###
 
     def display_version_info(self):
-    
-        line1 = "SeedSigner"
-        line2 = "Version v" + self.controller.VERSION
-        line3 = "built for use with"
-        line4 = "Specter-desktop"
-        line5 = "v1.1.0 or higher"
-        line6 = "(Joystick RIGHT to EXIT)"
-
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
-        tw, th = View.draw.textsize(line1, font=View.IMPACT22)
-        View.draw.text(((240 - tw) / 2, 20), line1, fill="ORANGE", font=View.IMPACT22)
-        tw, th = View.draw.textsize(line2, font=View.IMPACT22)
-        View.draw.text(((240 - tw) / 2, 55), line2, fill="ORANGE", font=View.IMPACT22)
-        tw, th = View.draw.textsize(line3, font=View.IMPACT22)
-        View.draw.text(((240 - tw) / 2, 90), line3, fill="ORANGE", font=View.IMPACT22)
-        tw, th = View.draw.textsize(line4, font=View.IMPACT22)
-        View.draw.text(((240 - tw) / 2, 125), line4, fill="ORANGE", font=View.IMPACT22)
-        tw, th = View.draw.textsize(line5, font=View.IMPACT22)
-        View.draw.text(((240 - tw) / 2, 160), line5, fill="ORANGE", font=View.IMPACT22)
-        tw, th = View.draw.textsize(line6, font=View.IMPACT18)
-        View.draw.text(((240 - tw) / 2, 210), line6, fill="ORANGE", font=View.IMPACT18)
+        View.empty_screen()
+        self.draw_text("SeedSigner", 20, 22)
+        self.draw_text("Version v" + self.controller.VERSION, 55, 22)
+        self.draw_text("built for use with", 90, 22)
+        self.draw_text("Specter-desktop", 125, 22)
+        self.draw_text("v1.1.0 or higher", 160, 22)
+        self.draw_text("(Joystick RIGHT to EXIT)", 210, 18)
         View.DispShowImage()

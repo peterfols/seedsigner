@@ -32,22 +32,25 @@ class Buttons:
 
         return
 
-    def wait_for(self, keys = [], check_release = True, release_keys = []) -> int:
+    def wait_for(self, keys=None, check_release=True, release_keys=None) -> int:
+        keys = [] if not keys else keys
+        release_keys = [] if not release_keys else release_keys
         if not release_keys:
             release_keys = keys
         while True:
             for i in keys:
-                if check_release == False or ((check_release == True and i in release_keys and B.release_lock == True) or check_release == True and i not in release_keys):
+                if check_release is False or ((check_release is True and i in release_keys and B.release_lock is True) or check_release is True and i not in release_keys):
                     # when check release is False or the release lock is released (True)
-                    if self.GPIO.input(i) == GPIO.LOW or self.override_ind == True:
+                    if self.GPIO.input(i) == GPIO.LOW or self.override_ind is True:
                         B.release_lock = False
-                        if self.override_ind == True:
+                        if self.override_ind is True:
                             self.override_ind = False
                             return B.OVERRIDE
                         return i
             time.sleep(0.01) # wait 10 ms to give CPU chance to do other things
 
-    def add_events(self, keys = []):
+    def add_events(self, keys=None):
+        keys = [] if not keys else keys
         for i in keys:
             GPIO.add_event_detect(i, self.GPIO.RISING, callback=Buttons.rising_callback)
 
@@ -56,7 +59,7 @@ class Buttons:
         return
 
     def trigger_override(self) -> bool:
-        if self.override_ind == False:
+        if self.override_ind is False:
             self.override_ind = True
             return True
 

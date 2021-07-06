@@ -21,7 +21,7 @@ class MenuView(View):
 
     ### Main Menu
 
-    def display_main_menu(self, sub_menu = None) -> int:
+    def display_main_menu(self, sub_menu=None) -> int:
         ret_val = 0
         input = 0
         lines = ["Seed Tools", "Signing Tools", "Settings", "Power OFF Device"]
@@ -141,7 +141,8 @@ class MenuView(View):
 
     ### Generic Single Menu Selection (returns 1,2,3,4,5,6 ...)
 
-    def display_generic_selection_menu(self, lines = [], title = None, bottom = None) -> int:
+    def display_generic_selection_menu(self, lines=None, title=None, bottom=None) -> int:
+        lines = [] if not lines else lines
         self.draw_menu(lines, 1, title, bottom)
 
         while True:
@@ -155,7 +156,7 @@ class MenuView(View):
 
     ### Generic Word 12 or 24 seed phrase menu
 
-    def display_12_24_word_menu(self, return_txt = "... [ Return to ... ]") -> int:
+    def display_12_24_word_menu(self, return_txt="... [ Return to ... ]") -> int:
         lines = [return_txt, "Use a 12 word seed", "Use a 24 word seed"]
         self.draw_menu(lines)
 
@@ -176,7 +177,7 @@ class MenuView(View):
 
     ### Select a Seed Slot to Save a Seed Menu
 
-    def display_saved_seed_menu(self, storage, type = 1, return_sel_txt = "... [ Return to Seed Tools ]") -> int:
+    def display_saved_seed_menu(self, storage, type=1, return_sel_txt="... [ Return to Seed Tools ]") -> int:
         lines = []
         if return_sel_txt != None:
             lines.append(return_sel_txt)
@@ -192,11 +193,11 @@ class MenuView(View):
                 lines[3] = "Display Seed Slot #3" # replace
         elif type == 2:
             # Show only free slots
-            if storage.check_slot_1() == False:
+            if storage.check_slot_1() is False:
                 lines.append("Use Seed Slot #1")
-            if storage.check_slot_2() == False:
+            if storage.check_slot_2() is False:
                 lines.append("Use Seed Slot #2")
-            if storage.check_slot_3() == False:
+            if storage.check_slot_3() is False:
                 lines.append("Use Seed Slot #3")
             if storage.num_of_free_slots() == 0:
                 return 0
@@ -232,7 +233,7 @@ class MenuView(View):
 
     ### Generic Draw Menu Method
 
-    def draw_menu(self, lines, selected_menu_num = 1, title = None, bottom = None) -> None:
+    def draw_menu(self, lines, selected_menu_num=1, title=None, bottom=None) -> None:
         if title == None:
             t = "SeedSigner  v" + self.controller.VERSION
         else:
@@ -259,9 +260,8 @@ class MenuView(View):
         if lines != self.menu_lines or selected_menu_num != self.selected_menu_num:
             #Menu has changed, redraw
 
-            View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
-            tw, th = View.draw.textsize(t, font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 2), t, fill="ORANGE", font=View.IMPACT22)
+            View.empty_screen()
+            View.draw_text(t, 2, 22)
 
             num_of_lines = len(lines)
 
@@ -293,8 +293,7 @@ class MenuView(View):
                 if num_of_lines >= 12:
                     self.draw_menu_text(15, 150, lines[11], (True if selected_menu_num == 12 else False))
 
-            tw, th = View.draw.textsize(b, font=View.IMPACT18)
-            View.draw.text(((240 - tw) / 2, 210), b, fill="ORANGE", font=View.IMPACT18)
+            View.draw_text(b, 210, 18)
             View.DispShowImage()
 
             # saved update menu lines and selection
@@ -305,13 +304,13 @@ class MenuView(View):
 
     ### Generic Menu Navigation
 
-    def menu_up(self, title = None, bottom = None):
+    def menu_up(self, title=None, bottom=None):
         if self.selected_menu_num <= 1:
             self.draw_menu(self.menu_lines, len(self.menu_lines), title, bottom)
         else:
             self.draw_menu(self.menu_lines, self.selected_menu_num - 1, title, bottom)
 
-    def menu_down(self, title = None, bottom = None):
+    def menu_down(self, title=None, bottom=None):
         if self.selected_menu_num >= len(self.menu_lines):
             self.draw_menu(self.menu_lines, 1, title, bottom)
         else:
@@ -321,10 +320,9 @@ class MenuView(View):
 
     def draw_menu_text(self, x, y, line, selected) -> None:
 
-        if selected == True:
-            View.draw.rectangle((5, y-5, 235, y+30), outline=0, fill="ORANGE")
-            View.draw.text((x, y) , line, fill="BLACK", font=View.IMPACT20)
+        if selected is True:
+            View.draw_rectangle((5, y-5, 235, y+30), outline=0)
+            View.draw_text(line, y, 20, width=x, fill='BLACK')
         else:
-            View.draw.text((x, y) , line, fill="ORANGE", font=View.IMPACT20)
-
+            View.draw_text(line, y, 20, width=x)
         return

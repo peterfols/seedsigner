@@ -2,32 +2,18 @@
 from PIL import Image, ImageDraw, ImageFont
 import spidev as SPI
 from multiprocessing import Queue
+from functools import partial
+from seedsigner.helpers.screen import Screen, get_screen_dimensions, scale_dimension
 
-from seedsigner.helpers import ST7789
 
 ### Generic View Class to Instatiate Display
 ### Static Class variables are used for display
 ### Designed to be inherited for other view classes, but not required
+DEFAULT_COLOR = "ORANGE"
 
 class View:
-
-    WIDTH = 240
-    HEIGHT = 240
-
-    # Define necessart fonts
-    IMPACT16 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 16)
-    IMPACT18 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 18)
-    IMPACT20 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 20)
-    IMPACT21 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 21)
-    IMPACT22 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 22)
-    IMPACT23 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 23)
-    IMPACT25 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 25)
-    IMPACT26 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 26)
-    IMPACT35 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 35)
-    IMPACT50 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', 50)
-    COURIERNEW14 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/courbd.ttf', 14)
-    COURIERNEW38 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/courbd.ttf', 38)
-    COURIERNEW30 = ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/courbd.ttf', 30)
+    WIDTH, HEIGHT = get_screen_dimensions()
+    scale_dimension = partial(scale_dimension, HEIGHT)
 
     RST = 27
     DC = 25
@@ -57,116 +43,131 @@ class View:
         # 240x240 display with hardware SPI:
         View.bus = 0
         View.device = 0
-        View.disp = ST7789(SPI.SpiDev(View.bus, View.device),View.RST, View.DC, View.BL)
+        View.disp = Screen(SPI.SpiDev(View.bus, View.device), View.RST, View.DC, View.BL)
         View.disp.Init()
 
-        self.queue = Queue()
+        View.queue = Queue()
 
-    def DispShowImage(image = None):
+    @classmethod
+    def DispShowImage(cls, image=None):
         if image == None:
             image = View.canvas
-        View.disp.ShowImage(image, 0, 0)
+        cls.disp.ShowImage(image, 0, 0)
 
-    def DispShowImageWithText(image, text):
+    @classmethod
+    def DispShowImageWithText(cls, image, text):
         image_copy = image.copy()
         draw = ImageDraw.Draw(image_copy)
-        tw, th = draw.textsize(text, font=View.COURIERNEW14)
-        draw.text(((240 - tw) / 2, 228), text, fill="GREY", font=View.COURIERNEW14)
-        View.disp.ShowImage(image_copy, 0, 0)
+        tw, th = draw.textsize(text, font=cls.get_font('couriernew', cls.scale_dimension(14)))
+        draw.text(((cls.WIDTH - tw) / 2, cls.scale_dimension(228)), text, fill="GREY", font=cls.get_font('couriernew', cls.scale_dimension(14)))
+        cls.disp.ShowImage(image_copy, 0, 0)
 
-    def draw_modal(self, lines = [], title = "", bottom = "") -> None:
+    @classmethod
+    def get_font(cls, name, size):
+        if name == 'impact':
+            return ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/Impact.ttf', size)
+        elif name == 'couriernew':
+            return ImageFont.truetype('/usr/share/fonts/truetype/msttcorefonts/courbd.ttf', size)
 
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+    @classmethod
+    def draw_text(cls, text, height, font_size, font='impact', align='center', fill=DEFAULT_COLOR, width=None):
+        font_size = cls.scale_dimension(font_size)
+        height = cls.scale_dimension(height)
+        width = cls.scale_dimension(width) if width else None
+        if not width and align == 'center':
+            tw, th = cls.draw.textsize(text, font=cls.get_font(font, font_size))
+            width = (cls.WIDTH - tw) / 2
+        elif not width and align == 'right':
+            tw, th = cls.WIDTH - cls.get_font(font, font_size).getsize(text)[0]
+            width = tw
+        cls.draw.text(width, height, text, fill=fill, font=cls.get_font(font, font_size))
+
+    @classmethod
+    def draw_polygon(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
+        cls.draw.polygon([(cls.scale_dimension(dim[0]), cls.scale_dimension(dim[1])) for dim in dimensions], outline=outline, fill=fill)
+
+    @classmethod
+    def draw_rectangle(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR, resize=True):
+        if resize:
+            dimensions = [(cls.scale_dimension(dim[0]), cls.scale_dimension(dim[1])) for dim in dimensions]
+        return cls.draw.rectangle(dimensions, outline=outline, fill=fill)
+
+    @classmethod
+    def empty_screen(cls):
+        return cls.draw_rectangle((0, 0, cls.canvas_width, cls.canvas_height), outline=0, fill=0, resize=False)
+
+    @classmethod
+    def draw_ellipse(cls, dimensions, outline=DEFAULT_COLOR, fill=DEFAULT_COLOR):
+        dimensions = [(cls.scale_dimension(dim[0]), cls.scale_dimension(dim[1])) for dim in dimensions]
+        return cls.draw.ellipse(dimensions, outline=outline, fill=fill)
+
+    @classmethod
+    def draw_modal(cls, lines=None, title="", bottom="") -> None:
+        lines = [] if not lines else lines
+        cls.empty_screen()
 
         if len(title) > 0:
-            tw, th = View.draw.textsize(title, font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 2), title, fill="ORANGE", font=View.IMPACT22)
+            cls.draw_text(title, 2, 22)
+        if len(lines) == 1:
+            cls.draw_text(lines[0], 90, 26)
+        elif len(lines) == 2:
+            cls.draw_text(lines[0], 90, 22)
+            cls.draw_text(lines[1], 125, 22)
+        elif len(lines) == 3:
+            cls.draw_text(lines[0], 55, 26)
+            cls.draw_text(lines[1], 90, 22)
+            cls.draw_text(lines[2], 125, 22)
+        elif len(lines) == 4:
+            cls.draw_text(lines[0], 55, 22)
+            cls.draw_text(lines[1], 90, 22)
+            cls.draw_text(lines[2], 125, 22)
+            cls.draw_text(lines[3], 160, 22)
 
         if len(bottom) > 0:
-            tw, th = View.draw.textsize(bottom, font=View.IMPACT18)
-            View.draw.text(((240 - tw) / 2, 210), bottom, fill="ORANGE", font=View.IMPACT18)
+            cls.draw_text(lines[3], 210, 18)
 
-        if len(lines) == 1:
-            tw, th = View.draw.textsize(lines[0], font=View.IMPACT26)
-            View.draw.text(((240 - tw) / 2, 90), lines[0], fill="ORANGE", font=View.IMPACT26)
-        elif len(lines) == 2:
-            tw, th = View.draw.textsize(lines[0], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 90), lines[0], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[1], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 125), lines[1], fill="ORANGE", font=View.IMPACT22)
-        elif len(lines) == 3:
-            tw, th = View.draw.textsize(lines[0], font=View.IMPACT26)
-            View.draw.text(((240 - tw) / 2, 55), lines[0], fill="ORANGE", font=View.IMPACT26)
-            tw, th = View.draw.textsize(lines[1], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 90), lines[1], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[2], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 125), lines[2], fill="ORANGE", font=View.IMPACT22)
-        elif len(lines) == 4:
-            tw, th = View.draw.textsize(lines[0], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 55), lines[0], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[1], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 90), lines[1], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[2], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 125), lines[2], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[3], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 160), lines[3], fill="ORANGE", font=View.IMPACT22)
-
-        View.DispShowImage()
+        cls.DispShowImage()
 
         return
 
-    def draw_prompt_yes_no(self, lines = [], title = "", bottom = "") -> None:
+    @classmethod
+    def draw_prompt_yes_no(cls, lines=None, title="", bottom="") -> None:
+        lines = [] if not lines else lines
 
-        self.draw_prompt_custom("", "Yes ", "No ", lines, title, bottom)
+        cls.draw_prompt_custom("", "Yes ", "No ", lines, title, bottom)
         return
 
-    def draw_prompt_custom(self, a_txt, b_txt, c_txt, lines = [], title = "", bottom = "") -> None:
-
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+    @classmethod
+    def draw_prompt_custom(cls, a_txt, b_txt, c_txt, lines=None, title="", bottom="") -> None:
+        lines = [] if not lines else lines
+        cls.empty_screen()
 
         if len(title) > 0:
-            tw, th = View.draw.textsize(title, font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 2), title, fill="ORANGE", font=View.IMPACT22)
+            cls.draw_text(title, 2, 22)
 
         if len(bottom) > 0:
-            tw, th = View.draw.textsize(bottom, font=View.IMPACT18)
-            View.draw.text(((240 - tw) / 2, 210), bottom, fill="ORANGE", font=View.IMPACT18)
+            cls.draw_text(title, 210, 18)
 
         if len(lines) == 1:
-            tw, th = View.draw.textsize(lines[0], font=View.IMPACT26)
-            View.draw.text(((240 - tw) / 2, 90), lines[0], fill="ORANGE", font=View.IMPACT26)
+            cls.draw_text(lines[0], 90, 26)
         elif len(lines) == 2:
-            tw, th = View.draw.textsize(lines[0], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 90), lines[0], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[1], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 125), lines[1], fill="ORANGE", font=View.IMPACT22)
+            cls.draw_text(lines[0], 90, 22)
+            cls.draw_text(lines[1], 125, 22)
         elif len(lines) == 3:
-            tw, th = View.draw.textsize(lines[0], font=View.IMPACT26)
-            View.draw.text(((240 - tw) / 2, 20), lines[0], fill="ORANGE", font=View.IMPACT26)
-            tw, th = View.draw.textsize(lines[1], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 90), lines[1], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[2], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 125), lines[2], fill="ORANGE", font=View.IMPACT22)
+            cls.draw_text(lines[0], 20, 26)
+            cls.draw_text(lines[1], 90, 22)
+            cls.draw_text(lines[2], 125, 22)
         elif len(lines) == 4:
-            tw, th = View.draw.textsize(lines[0], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 20), lines[0], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[1], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 90), lines[1], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[2], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 125), lines[2], fill="ORANGE", font=View.IMPACT22)
-            tw, th = View.draw.textsize(lines[3], font=View.IMPACT22)
-            View.draw.text(((240 - tw) / 2, 160), lines[3], fill="ORANGE", font=View.IMPACT22)
+            cls.draw_text(lines[0], 20, 22)
+            cls.draw_text(lines[1], 90, 22)
+            cls.draw_text(lines[2], 125, 22)
+            cls.draw_text(lines[3], 160, 22)
 
-        a_x_offset = 240 - View.IMPACT25.getsize(a_txt)[0]
-        View.draw.text((a_x_offset, 39 + 0), a_txt, fill="ORANGE", font=View.IMPACT25)
+        cls.draw_text(a_txt, 39, 25)
+        cls.draw_text(a_txt, 39+60, 25)
+        cls.draw_text(a_txt, 39+120, 25)
 
-        b_x_offset = 240 - View.IMPACT25.getsize(b_txt)[0]
-        View.draw.text((b_x_offset , 39 + 60), b_txt, fill="ORANGE", font=View.IMPACT25)
-
-        c_x_offset = 240 - View.IMPACT25.getsize(c_txt)[0]
-        View.draw.text((c_x_offset , 39 + 120), c_txt, fill="ORANGE", font=View.IMPACT25)
-
-        View.DispShowImage()
+        cls.DispShowImage()
 
         return
 
@@ -174,26 +175,18 @@ class View:
     ### Power Off Screen
     ###
 
-    def display_power_off_screen(self):
+    @classmethod
+    def display_power_off_screen(cls):
 
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        cls.empty_screen()
 
-        line1 = "Powering Down..."
-        line2 = "Please wait about"
-        line3 = "30 seconds before"
-        line4 = "disconnecting power."
+        cls.draw_text("Powering Down...", 45, 22)
+        cls.draw_text("Please wait about", 100, 20)
+        cls.draw_text("30 seconds before", 130, 20)
+        cls.draw_text("disconnecting power.", 160, 20)
+        cls.DispShowImage()
 
-        tw, th = View.draw.textsize(line1, font=View.IMPACT22)
-        View.draw.text(((240-tw)/2, 45), line1, fill="ORANGE", font=View.IMPACT22)
-        tw, th = View.draw.textsize(line2, font=View.IMPACT20)
-        View.draw.text(((240-tw)/2, 100), line2, fill="ORANGE", font=View.IMPACT20)
-        tw, th = View.draw.textsize(line3, font=View.IMPACT20)
-        View.draw.text(((240-tw)/2, 130), line3, fill="ORANGE", font=View.IMPACT20)
-        tw, th = View.draw.textsize(line4, font=View.IMPACT20)
-        View.draw.text(((240-tw)/2, 160), line4, fill="ORANGE", font=View.IMPACT20)
-        View.DispShowImage()
-
-
-    def display_blank_screen(self):
-        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
-        View.DispShowImage()
+    @classmethod
+    def display_blank_screen(cls):
+        cls.empty_screen()
+        cls.DispShowImage()

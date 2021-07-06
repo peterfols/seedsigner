@@ -16,7 +16,7 @@ class CameraProcess:
 
         running = True
 
-        while running == True:
+        while running is True:
 
             camera_on = False
 

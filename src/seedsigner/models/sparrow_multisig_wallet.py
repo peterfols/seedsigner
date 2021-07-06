@@ -21,7 +21,7 @@ import textwrap
 
 class SparrowMultiSigWallet(Wallet):
 
-    def __init__(self, current_network = "main", hardened_derivation = "m/48h/0h/0h/2h") -> None:
+    def __init__(self, current_network="main", hardened_derivation="m/48h/0h/0h/2h") -> None:
         if current_network == "main":
             Wallet.__init__(self, current_network, "m/48h/0h/0h/2h")
         elif current_network == "test":
@@ -133,11 +133,9 @@ class SparrowMultiSigWallet(Wallet):
             # if all frames have not all been captured, display progress to screen/display
             if not self.capture_complete() and self.scan_display_working == 0:
                 self.scan_display_working = 1
-                View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
-                tw, th = View.draw.textsize("Collecting QR Codes:", font=View.IMPACT25)
-                View.draw.text(((240 - tw) / 2, 15), "Collecting QR Codes:", fill="ORANGE", font=View.IMPACT25)
-                tw, th = View.draw.textsize(str(round(self.percentage_complete * 100)) + "% Complete", font=View.IMPACT22)
-                View.draw.text(((240 - tw) / 2, 125), str(round(self.percentage_complete * 100)) + "% Complete", fill="ORANGE", font=View.IMPACT22)
+                View.empty_screen()
+                View.draw_text("Collecting QR Codes:", 15, 25)
+                View.draw_text(str(round(self.percentage_complete * 100)) + "% Complete", 125, 22)
                 View.DispShowImage()
                 self.scan_display_working = 0
 
@@ -169,13 +167,13 @@ class SparrowMultiSigWallet(Wallet):
 
         return True
 
-    def make_xpub_qr_codes(self, data, callback = None) -> []:
+    def make_xpub_qr_codes(self, data, callback=None) -> []:
         qr = QR()
         images = []
         images.append(qr.qrimage(data))
         return images
 
-    def make_signing_qr_codes(self, data, callback = None) -> []:
+    def make_signing_qr_codes(self, data, callback=None) -> []:
         qr = QR()
 
         cnt = 0
@@ -202,7 +200,7 @@ class SparrowMultiSigWallet(Wallet):
     def qr_sleep(self):
         time.sleep(0.4)
 
-    def set_qr_density(density):
+    def set_qr_density(self, density):
         if density == Wallet.LOW:
             self.qrsize = 70
         elif density == Wallet.HIGH:

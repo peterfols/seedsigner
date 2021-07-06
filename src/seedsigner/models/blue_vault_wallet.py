@@ -18,7 +18,7 @@ import re
 
 class BlueVaultWallet(Wallet):
 
-    def __init__(self, current_network = "main", hardened_derivation = "m/48h/0h/0h/2h") -> None:
+    def __init__(self, current_network="main", hardened_derivation="m/48h/0h/0h/2h") -> None:
         if current_network == "main":
             Wallet.__init__(self, current_network, "m/48h/0h/0h/2h")
         elif current_network == "test":
@@ -99,13 +99,13 @@ class BlueVaultWallet(Wallet):
 
         return True
 
-    def make_xpub_qr_codes(self, data, callback = None) -> []:
+    def make_xpub_qr_codes(self, data, callback=None) -> []:
         qr = QR()
         images = []
         images.append(qr.qrimage(data))
         return images
 
-    def make_signing_qr_codes(self, data, callback = None) -> []:
+    def make_signing_qr_codes(self, data, callback=None) -> []:
         qr = QR()
 
         qrdata = data[0].upper()
@@ -132,7 +132,7 @@ class BlueVaultWallet(Wallet):
 
         return images
 
-    def set_qr_density(density):
+    def set_qr_density(self, density):
         if density == Wallet.LOW:
             self.qrsize = 100
         elif density == Wallet.HIGH:
